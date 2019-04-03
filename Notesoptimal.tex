@@ -1,4 +1,4 @@
-\documentclass[final]{amsart}
+\documentclass[final]{siamltex}
 % written by Reinhard January 23 2019
 % updated by Reinhard  Feb. 1
 % updated by Reinhard  Feb. 5
@@ -222,10 +222,7 @@ Reinhard Nabben\footnotemark[1]
 
 
 
-\title{On optimal algebraic multigrid methods}
-
-
-
+\title{On Optimal Algebraic Multigrid Methods}
 
 
 \begin{document}
@@ -241,24 +238,27 @@ Germany
 
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \begin{abstract}
-In this note we present an alternative approach  to obtain optimal
+In this note we present an alternative way to obtain optimal
 interpolation operators for two-grid methods applied to Hermitian positive
-definite  linear systems.  In \cite{FalVZ05,Zik08} the $A$-norm of the error
+definite linear systems.  In \cite{FalVZ05,Zik08} the $A$-norm of the error
 propagation operator of algebraic multigrid methods is characterized. These
-results are just recently used in \cite{XuZ17, Bra18} to determine  optimal
+results are just recently used in \cite{XuZ17, Bra18} to determine optimal
 interpolation operators. Here we use a characterization not of the $A$-norm but
-of the spectrum of the  error propagation operator of two-grid methods which
+of the spectrum of the  error propagation operator of two-grid methods, which
 was proved in  \cite{GarKN18}. This characterization holds for arbitrary
 matrices. For Hermitian positive definite systems this result   leads to
-optimal interpolation operators with respect to the $A$-norm in a short way.
-But it also leads  to optimal interpolation operators with respect to the
-spectral radius. For the symmetric multigrid method (pre- and  post-smoothing)
-the optimal interpolation operators are  the same. But for post-smoothing only
-multigrid the optimal interpolations and hence the optimal algebraic multigrid
-methods are  different.  Moreover, using the  characterization of the spectrum,
-we can show that the found   optimal interpolation operators are also optimal
+optimal interpolation operators with respect to the $A$-norm in a short way, 
+moreover, it also leads to optimal interpolation operators with respect to the
+spectral radius. For the symmetric two-grid method (with pre- and 
+post-smoothing)
+the optimal interpolation operators are the same. But for a two-g
+rid method with only post-smoothing the optimal interpolations (and hence the
+optimal algebraic multigrid
+methods) are  different.  Moreover, using the  characterization of the
+spectrum,
+we can show that the found  optimal interpolation operators are also optimal
 with
-respect to the condition number  of the multigrid preconditioned system.  
+respect to the condition number of the multigrid preconditioned system.  
 \end{abstract}
 
 
@@ -272,7 +272,7 @@ multigrid, optimal interpolation operator, two-grid methods
 
 \pagestyle{myheadings}
 \thispagestyle{plain}
-\markboth{L. Garc\'{i}a Ramos, R. Nabben} {optimal algebraic multigrid}
+\markboth{L. Garc\'{i}a Ramos, R. Nabben} {Optimal Algebraic Multigrid}
 
 \section{Introduction}
 Typical multigrid methods to solve the linear system 
@@ -281,12 +281,13 @@ Ax = b,
 \]
 where $A$ is an $n \times n$ matrix, consist  of two ingredients, the smoothing
 and  the
-coarse grid correction. The smoothing is mostly done by one or just a few
-steps of a  basic stationary iterative method like the Jacobi or Gauss-Seidel
-method.  For the coarse grid correction
- a {\it prolongation or interpolation
-operator} $P \in \Cnr$ and a    {\it
-restriction operator} $R \in \Crn$  are needed. The coarse grid matrix is then
+coarse grid correction. The smoothing is typically done by a
+few
+steps of a basic stationary iterative method, like the Jacobi or Gauss-Seidel
+method.  For the coarse grid correction,
+ a {\it prolongation} or {\it interpolation}
+operator $P \in \Cnr$ and a   {\it
+restriction} operator $R \in \Crn$  are needed. The coarse grid matrix is then
 defined as
 \beq \label{def:multAC}
 A_C :=  RAP \innCrr.
@@ -298,55 +299,66 @@ Here we always assume  that $A$ and $A_C$ are  non-singular.
 %\beq \label{def:multQPD}
 %Q := PA_C^{-1}R.
 %\eeq
-The typical multigrid or algebraic multigrid (AMG) iteration or error
+The multigrid or algebraic multigrid (AMG) error
 propagation matrix  is then given by
-
  \beq \label{mgiteration}
 E_M = (I-M_2^{-1}A)^{\nu_2}(I -  PA_C^{-1}RA)(I-M_1^{-1}A)^{\nu_1},
 \eeq
 where $M_1^{-1} \innCnn$ and $M_2^{-1} \innCnn$  are   {\it smoothers}, $\nu_1$
-and $\nu_2$  are the number of  smoothing steps and $PA_C^{-1}R$ is the {\it
+and $\nu_2$  are the number of pre- and post-smoothing steps respectively, and
+$PA_C^{-1}R$
+is
+the
+{\it
 coarse grid
-correction} matrix. 
-
-The multigrid method is convergent if and only if the spectral radius of $E_M$,
-i.e. $\rho(E_m)$, is less than one.
-Often not the spectral radius but a consistent norm $\|.\|$ of $E_M$ is
-considered. Note that
+correction} matrix. The multigrid method is convergent if and only if the
+spectral radius of the
+error propagation matrix
+$\rho(E_m)$ is less than one.
+Alternatively, the norm of the error propagation matrix $\|E_M\|$ 
+can be considered, where
+$\|\cdot\|$
+is
+a
+consistent matrix
+norm, and in this case one has  
 \[
 \rho(E_M) \leq \|E_M\|.
 \]  
-
 The aim of algebraic multigrid methods is to balance the interplay between
 smoothing and coarse grid correction steps. However, most of the existing AMG
-methods  first fix a smoother and then optimize a certain quantity to choose
+methods first fix a smoother and then optimize a certain quantity to choose
 the interpolation $P$ and restriction $R$.
-%Prolongation and restriction operators are called optimal if $\rho(E_M)$ is
-minimal.
 
-%%%%%%  Theoretical results for multigrid methods are mostly obtained for
-symmetric positive definite  matrices
-
-%
-%If the spectral radius of $E_M$ is less  than one there is a non-singular
-matrix
-%$B$  such that
-
-The matrix $E_M$ can be written  as 
-
- \beq \label{mgb}
+To simplify the analysis, we assume that there exists a non-singular matrix $X$
+such that
+\beq \label{mgx}
+(I-X^{-1}A) = (I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2},
+\eeq
+it can be shown that such a matrix $X$ exists if the spectral radius of $
+(I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2}$ is less  than one, see e.g.
+\cite{BenS97}. Moreover, note that the matrix $E_M$ can be
+written  as 
+\beq \label{mgb}
 E_M = I-BA,
 \eeq
+where the  matrix $B$ is known as the multigrid preconditioner, i.e., $B$ is an
+approximation of $A^{-1}$.
+Therefore,
+eigenvalue estimates of $BA$ are of interest, and  they also lead to
+estimates for
+the eigenvalues of
+$E_M$.
 
+%Prolongation and restriction operators are called optimal if $\rho(E_M)$ is
+%minimal.
 
-
-where the    matrix $B$  also acts as the multigrid preconditioner. Therefore
-eigenvalue estimates of $BA$ are of interest. Note that  the eigenvalues of
-$E_M$
-are just one  minus the eigenvalues of $BA$.
-
-
-
+%%%%%%  Theoretical results for multigrid methods are mostly obtained for
+%symmetric positive definite  matrices
+%
+%If the spectral radius of $E_M$ is less  than one there is a non-singular
+%matrix
+%$B$  such that
 
 %Next  we will consider  the case $\nu_1 = 1$, $\nu_2 = 0$. We obtain
 % \beqo 
@@ -383,64 +395,95 @@ are just one  minus the eigenvalues of $BA$.
 
 %Now, let us consider  the general case, i.e.  $T$ is  given as in
 %\eqref{mgiteration}.
-We assume that there is a
-non-singular matrix $X$ such that
-\beq \label{mgx}
-(I-X^{-1}A) = (I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2}.
-\eeq
-If the spectral radius of $
-(I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2}$ is less  than one, then  there
-exists such a
-matrix  $X$, see e.g. \cite{BenS97}.
 
-The following theorem, proved by Garcia, Kehl  and Nabben in \cite{GarKN18},
-gives a characterization of the spectrum $\sigma(BA)$ of $BA$ and hence a
+%then  thereexists such amatrix  $X$, 
+The following theorem, proved by Garc{\'i}a Ramos, Kehl  and Nabben in
+\cite{GarKN18},
+gives a characterization of the spectrum of $BA$, and hence a
 characterization of the spectrum of the general error propagation matrix $E_M$.
-It holds  for arbitrary matrices $A$.
-
-
 \begin{theorem} \label{theo:mg:eig}
-Let $A \innCnn$ be  non-singular. Let   $P \innCnr $ and  $R \innCrn $ such
-that $RAP$ is non-singular. Moreover, let $M_1 \innCnn$ and $M_2 \innCnn $
+Let $A \innCnn$ be  non-singular, and let   $P \innCnr $ and  $R \innCrn $ such
+that $RAP$ is non-singular. Moreover, let $M_1 \innCnn$ and $M_2 \innCnn $ be
 such  that  that the matrices $X$ in \eqref{mgx} and $RXP$ are  non-singular.
-Then $B$ in
-\eqref{mgb}  is non-singular. Let $\tilde P, \tilde R \in \bC^{n \times n-r}$
+Then the following statements hold:
+\begin{enumerate}
+\item[(a)] The multigrid preconditioner $B$ in
+\eqref{mgb}  is non-singular. 
+
+\item[(b)] If $\tilde P, \tilde R \in \bC^{n \times n-r}$ are matrices
 such that the columns  of
-$\tilde P$ and $\tilde R $  build  orthonormal  bases of $(\im (P))^\perp$ and
-$(\im (R^{H}))^\perp$. Then  $\tilde P^HA^{-1}\tilde R$ is non-singular and
-$BA$  has the eigenvalue one  with multiplicity $r$, the other eigenvalues are
-nonzero and are   the eigenvalues of 
-\[
-\tilde P^HX^{-1}\tilde R (\tilde P^HA^{-1}\tilde R)^{-1}, 
-\]
-i.e.
-\[
-\sigma(BA) = \{1\} \cup \sigma(\tilde P^HX^{-1}\tilde R (\tilde P^HA^{-1}\tilde
-R)^{-1}).
-\]
+$\tilde P$ and $\tilde R $ form  orthonormal  bases of $(\im (P))^\perp$ and
+$(\im (R^{H}))^\perp$ respectively, then the matrices $\tilde P^HA^{-1}\tilde
+R$ and $P^HX^{-1}\tilde R$
+are
+non-singular
+and the spectrum of
+$BA$  is given by
+\[\sigma(BA) = \{1\} \cup \sigma(\tilde P^HX^{-1}\tilde R (\tilde
+P^HA^{-1}\tilde
+R)^{-1}).\]
+%where the eigenvalue one  with multiplicity $r$, the other eigenvalues are
+%nonzero and are   the eigenvalues of 
+%\[
+%\tilde P^HX^{-1}\tilde R (\tilde P^HA^{-1}\tilde R)^{-1}, 
+%\]
+%i.e.
+%\[
+%\sigma(BA) = \{1\} \cup \sigma(\tilde P^HX^{-1}\tilde R (\tilde
+%P^HA^{-1}\tilde
+%R)^{-1}).
+%\]
+
+\end{enumerate}
 \end{theorem}
 
-We apply this   theorem to  Hermitian positive  matrices and will 
-determine the  optimal interpolation operators of AMGs with respect to the
+We will apply this theorem to Hermitian positive definite (HPD)  matrices to
+determine
+the
+optimal interpolation operators of AMG methods with respect to
+the
 spectral radius of the error propagation matrix.
-For Hermitian  positive definite 
-matrices just recently optimal interpolation  operators with respect to the
-$A$-norm are established in \cite{XuZ17, Bra18}.
-For the symmetric multigrid method (pre- and  post-smoothing) the optimal
-interpolation operators are  the same. But for post-smoothing only multigrid
-the optimal interpolations and hence the optimal algebraic multigrid methods
-are  different.
-
-Using Theorem \ref{theo:mg:eig} we can also show that the found   optimal
-interpolation operators are also optimal  with
-respect to the condition number  of the multigrid preconditioned system.
-
- 
+For HPD 
+matrices, optimal interpolation  operators with respect to the
+$A$-norm have been obtained recently in \cite{XuZ17, Bra18}.
+We will show that the optimal interpolation operators with respect to the
+spectral
+radius
+for
+the
+symmetric/symmetrized
+multigrid
+method
+(with
+pre-
+and
+post-smoothing) and
+the
+optimal
+interpolation operator with respect to the $A$-norm are the same. But for
+multigrid
+with
+only
+a
+post-smoothing step
+the optimal interpolation operators with respect to the spectral radius and
+$A$-norm
+(and
+hence
+the
+optimal
+algebraic
+multigrid
+methods)
+are  different. Using Theorem \ref{theo:mg:eig} we can also show that the 
+interpolation operators with respect to the spectral radius are also optimal 
+with
+respect to the condition number of the multigrid preconditioned system. 
 
 \section{Optimal interpolation  for Hermitian positive definite matrices}
 
-Here   we  consider Hermitian  positive definite matrices matrices $A$. The
-matrix $A$ then induces the so-called $A$ norm, defined for $v \in \bCn$ and $S
+In this section  we  consider a HPD matrix $A$. Recall that he norm induced by
+$A$ (or $A$-norm) is defined for $v \in \bCn$ and $S
 \in \Cnn$ by
 \[
 \| v \|_A^2 = (v,v)_A = \|A\uha v\|_2^2,
@@ -450,34 +493,39 @@ and
 \| S \|_A = \|A\uha S A\umha\|_2.
 \]
 
-We consider  the  following two-grid  methods given by the error propagation
-operator
+We will study the  following two-grid  methods given by the error
+propagation
+operators
 \beq \label{mge}
 E_{TG} = (I-M^{-H}A)(I -  PA_C^{-1}P^HA)
 \eeq
-and the  symmetrized version 
+ and the symmetrized version
 \beq \label{smge}
 E_{STG} = (I-M^{-H}A)(I -  PA_C^{-1}P^HA)(I-M^{-1}A).
 \eeq
-
-Thus  we use $R = P^H$. The range of $P$, i.e. $\ran (P)$, is called  the
+Thus we are using $R = P^H$. The range of $P$,
+i.e.
+$\ran
+(P)$,
+is
+called
+the
 coarse space $V_c$.
 Here   we fix  the smoother $M^{-1}$ and consider $E_{TG}$ and $E_{STG}$ with
 respect  to the choice of the interpolation operator $P$. So, in this note,
-$E_{TG}$ and $E_{STG}$ depend on $P$.
-
-
-We assume that the smoother $M^{-1}$ satisfies 
+$E_{TG}$ and $E_{STG}$ depend on $P$. In addition, we assume that the smoother
+$M^{-1}$
+satisfies 
 \[
  \|(I-M^{-1}A \|_A < 1,
 \]
-which is equivalent to 
+which is equivalent to the condition
 \beq \label{eq:pos}
 M +  M^{H} - A  \quad \mbox{is  positive definite,} 
 \eeq
-see e.g. \cite{Vas08}. 
+see, e.g., \cite{Vas08}. 
 
-It is proved by  Falgout and Vassilewski \cite{FalV04} that
+It is proved by  Falgout and Vassilevski \cite{FalV04} that
 \beq \label{normeq}
 \|E_{STG}\|_A = \|E_{TG}\|_A^2.
 \eeq
@@ -680,11 +728,11 @@ Hermitian positive defnite matrices $X$ and $A$ and for all matrices $\tilde U
 %\beqo
 %& &  \min \sigma(\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1})\\
 %& = &  \min_{z \innCnmr} (z^H\tilde U^HX^{-1}\tilde Uz (z^H\tilde
-U^HA^{-1}\tilde Uz)^{-1})\\
+%U^HA^{-1}\tilde Uz)^{-1})\\
 %& = &  \min_{\tilde z \in {\ran (\tilde U)} } (\tilde z^HX^{-1}\tilde z
-(\tilde z^HA^{-1}\tilde z)^{-1%})\\
+%(\tilde z^HA^{-1}\tilde z)^{-1%})\\
 %& \geq & \min_{\tilde z \in \bCn } (\tilde z^HX^{-1}\tilde z (\tilde
-z^HA^{-1}\tilde z)^{-1})\\
+%z^HA^{-1}\tilde z)^{-1})\\
 %& = & \lambda_{min}(X^{-1}A),
 %\eeqo
 
@@ -784,7 +832,7 @@ definite.
 
 Next, let us have  a closer look to the non symmetric multigrid and avoid
 scaling. We assume  that
-the smoother $M$ is Hermitain  and  leads to a convergent scheme, i.e.
+the smoother $M$ is Hermitian  and  leads to a convergent scheme, i.e.
 \beq  \label{eq:smoother:con:}
 \rho(I - M^{-1}A) < 1, 
 \eeq
