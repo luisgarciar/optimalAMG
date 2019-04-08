@@ -8,6 +8,8 @@
 
 \usepackage{graphicx,amsmath,amsfonts,color,a4,pifont}
 \usepackage{latexsym,amssymb,epsf,subfigure}
+\usepackage{lineno}
+\linenumbers
 %\usepackage[hyperref=true, url=false,
 %            isbn=false,
 %            backref=true,
@@ -62,7 +64,7 @@
 \DeclareMathOperator*{\dimn}{dim}
 \DeclareMathOperator*{\rankn}{rank}
 \DeclareMathOperator*{\spann}{span}
-
+\DeclareMathOperator*{\argmax}{argmax}
 
 \newcommand{\padef} {P_{\mathrm{ADEF}}}
 \newcommand{\U}{\mathcal{U}}
@@ -401,6 +403,7 @@ The following theorem, proved by Garc{\'i}a Ramos, Kehl  and Nabben in
 \cite{GarKN18},
 gives a characterization of the spectrum of $BA$, and hence a
 characterization of the spectrum of the general error propagation matrix $E_M$.
+
 \begin{theorem} \label{theo:mg:eig}
 Let $A \innCnn$ be  non-singular, and let   $P \innCnr $ and  $R \innCrn $ such
 that $RAP$ is non-singular. Moreover, let $M_1 \innCnn$ and $M_2 \innCnn $ be
@@ -412,8 +415,15 @@ Then the following statements hold:
 
 \item[(b)] If $\tilde P, \tilde R \in \bC^{n \times n-r}$ are matrices
 such that the columns  of
-$\tilde P$ and $\tilde R $ form  orthonormal  bases of $(\im (P))^\perp$ and
-$(\im (R^{H}))^\perp$ respectively, then the matrices $\tilde P^HA^{-1}\tilde
+$\tilde P$ and $\tilde R $ form  orthonormal  bases of $(\im
+(P))^\perp$ and
+$(\im (R^{H}))^\perp$ (the orthogonal complements of $\im
+(P)$ and $\im (R^{H}$ in the Euclidean inner product)  respectively,
+then
+the
+matrices
+$\tilde
+P^HA^{-1}\tilde
 R$ and $P^HX^{-1}\tilde R$
 are
 non-singular
@@ -511,9 +521,9 @@ is
 called
 the
 coarse space $V_c$.
-Here   we fix  the smoother $M^{-1}$ and consider $E_{TG}$ and $E_{STG}$ with
-respect  to the choice of the interpolation operator $P$. So, in this note,
-$E_{TG}$ and $E_{STG}$ depend on $P$. In addition, we assume that the smoother
+Here   we fix  the smoother $M^{-1}$ and let $E_{TG}$ and $E_{STG}$ vary with
+respect  to the choice of the interpolation operator $P$. In addition, we
+assume that the smoother
 $M^{-1}$
 satisfies 
 \[
@@ -523,99 +533,129 @@ which is equivalent to the condition
 \beq \label{eq:pos}
 M +  M^{H} - A  \quad \mbox{is  positive definite,} 
 \eeq
-see, e.g., \cite{Vas08}. 
-
-It is proved by  Falgout and Vassilevski \cite{FalV04} that
+see, e.g., \cite{Vas08}. Given a fixed  smoother $M^{-1}$ such that $\|
+I-M^{-1}A\|_A < 1$, many AMG
+methods are designed to minimizes $ \|E_{TG}\|_A$ or a related quantity. We
+say an interpolation operator $P^\star$ is optimal
+if it minimizes  $ \|E_{TG}\|_A$. In
+view of the equality
 \beq \label{normeq}
-\|E_{STG}\|_A = \|E_{TG}\|_A^2.
+\|E_{STG}\|_A = \|E_{TG}\|_A^2,
 \eeq
-
-Given a fixed  smoother $M^{-1}$ such that $\| I-M^{-1}A\|_A < 1$, many AMG
-methods are designed to minimizes $ \|E_{TG}\|_A$ or a related quantity. If an
-operator  $P$ minimizes    $ \|E_{TG}\|_A$  directly, $P$ is called optimal.
-
-Zikatanov proved in \cite{Zik08} that
+proved by 
+Falgout
+and Vassilevski in
+\cite{FalV04}, we can conclude that an optimal interpolation operator
+$P^\star$  
+also minimizes$ \|E_{STG}\|_A$. Zikatanov
+proved in \cite[Lemma 2.3]{Zik08} that
 \[
  \|E_{TG}\|_A^2 = 1 - \frac{1}{K(V_c)},
 \]
-where  $ K(V_c)$ is  a  value  depending  on the  coarse  space.
-
+where  $ K(V_c)$ is  a  quantity  depending  on the  coarse space, defined by
+***
+\[ \sup_{v \in \Cn} \frac{\|(I-Q)v\|_{M^-1}^2}{\|v\|_A} \]
 % The so called XZ-identity is used to get this   result \cite{XuZ02}
 Although  this 
-equality is known for a long time, just  recently it is used to determine
+equality has been known for a long time, only  recently it was used to
+determine
 optimal prolongation operators $P$  which lead   to a minimal  value of
-$\|E_{TG}\|_A$ for a given smoother (see \cite{XuZ17, Bra18}).  Here  we give
-an  alternative proof of this result using the characterization of the
+$\|E_{TG}\|_A$ for a given smoother (see \cite{XuZ17, Bra18}). We now recall
+this result.
+
+We will give an  alternative proof of this result using the
+characterization
+of
+the
 eigenvalues of the multigrid iteration operator  given in Theorem
-\ref{theo:mg:eig}.
+\ref{theo:mg:eig}.  
 
-But before  we consider  the  more general error propagation matrix $E_M$ in
-\eqref{mgiteration} with $R= P^H$  and  $E_{M} = I - BA$.
-
-
-%The error propagation matrix  $E_{M}$ can  be written  as 
-%\[
-%E_{M} = I - B_{M}A.
-%\]
-
-Let $\U $ be the subspace spanned  by the columns of the interpolation operator
-$P$ and let $\tilde U$ be a matrix whose  columns span  $\U ^\perp$. Then
+We  consider first  the  more general error propagation matrix $E_M$ in
+\eqref{mgiteration} with $R= P^H$  and  $E_{M} = I - BA$. We let $\U=
+\mathcal{R}(P) $ be the
+the
+range of the interpolation operator
+$P \in \Cnr$, and $\tilde U \in \Cnmr $ be an matrix with orthonormal columns
+that span
+$\U
+^\perp$ (the
+orthogonal complement  of $\U$ with respect to the Euclidean inner product).
+Then
 Theorem \ref{theo:mg:eig}  leads to
 \[
 \sigma (BA) = \{1\} \cup \sigma(\tilde U^HX^{-1}\tilde U (\tilde
 U^HA^{-1}\tilde U)^{-1}).
 \]
-Next assume that $X$ is Hermitian positive definite and that the largest
-eigenvalue of $BA$, i.e. $\lambda_{max}(BA)$,  is at most one. Then we have
-$\rho(E_M) = 1 - \lambda_{min}(BA)$. In order to find an optimal interpolation
-operator for the error propagation matrix  we need  to first find
-\[
-arg \max_{\tilde U \innbCnnmr} \min \sigma(\tilde U^HX^{-1}\tilde U (\tilde
+
+In what follows, given a matrix $C \inCnn$ with real eigenvalues we will denote
+by
+$\lambda_{\max}(C)$ and
+$\lambda_{\min}(C)$
+the maximum and minimum eigenvalues of $C$ respectively. Assuming that $X$ is
+Hermitian positive definite and that
+$\lambda_{\max}(BA)$ is at most one, we have
+$\rho(E_M) = 1 - \lambda_{\min}(BA)$. In order to find an optimal interpolation
+operator for the error propagation matrix,  we need  to first find
+\[  \tilde{U}^\star \in \argmax_{\tilde U \innbCnnmr,\, \tilde U^H\tilde U = I}
+\lambda_{\min}(\tilde
+U^HX^{-1}\tilde
+U
+(\tilde
 U^HA^{-1}\tilde U)^{-1}),
 \]
-and then find vectors which are orthogonal to the found optimal subspace
-$\mathcal{\tilde U}$.
-The following Theorem  solves the   first  problem.
+and then find an interpolation operator $P^\star \in \Cnr$ such that
+$\im(P^\star) =\im(\tilde U^\star)^{\perp}$. The following lemma  solves the 
+first problem.
 
-\begin{theorem} \label{theo:main}
-Let $A, X \innCnn$ be Hermitian positive definite. Let 
+\begin{lemma} \label{theo:main}
+Let $A, X \innCnn$ be Hermitian positive definite and let
+$\{(\mu_i,w_i)\}_{i=1}^n$ be the eigenpairs of the generalized eigenvalue
+problem
+ \[X^{-1}w = \mu
+A^{-1}w,\]
+where
 \beq
-\mu_1 \leq \mu_2 \leq \ldots \leq  \mu_n 
+0 < \mu_1 \leq \mu_2 \leq \ldots \leq  \mu_n.
 \eeq
-be the  eigenvalues of the generalized eigenvalue problem $X^{-1}w = \mu
-A^{-1}w$ and let $w_i$, $i = 1, \ldots, n$, be the eigenvectors corresponding
-to $\mu_i$. Then
-\[
-\max_{\tilde U \innbCnnmr} \min \sigma(\tilde U^HX^{-1}\tilde U (\tilde
+Then
+\[\max_{\tilde U \innbCnnmr, } \lambda_{\min} (\tilde
+U^HX^{-1}\tilde U
+(\tilde
 U^HA^{-1}\tilde U)^{-1}) = \mu_{r+1}
 \]
 which is achieved by 
 \[
-\tilde U = [w_{r+1}, \ldots, w_n].
-\] 
-\end{theorem}
+\tilde W = [\tilde{w}_{r+1}, \ldots, \tilde{w}_n],
+\in \C^{n-r}\] 
+where the columns of $\tilde W$ are orthogonal in the Euclidean inner 
+product and satisfy
+$\spann\{\tilde{w}_i\}_{i=1}^n = \spann\{w_i\}_{i=1}^n$.
+\end{lemma}
+
 \begin{proof}
-Let ${\bf V}$ be the set of subspaces of $\Cnn$ of dimension $n-r$. Using the
-Courant-Fischer theorem we obtain for $\tilde U \innbCnnmr$
-\beqo
-& &  \min \sigma(\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1})\\
-& = &  \min_{z \innCnmr} (z^H\tilde U^HX^{-1}\tilde Uz (z^H\tilde
-U^HA^{-1}\tilde Uz)^{-1})\\
-& = &  \min_{\tilde z \in {\ran (\tilde U)} } (\tilde z^HX^{-1}\tilde z (\tilde
-z^HA^{-1}\tilde z)^{-1}).
-\eeqo
-Thus
-\beqo
-& &  \max_{\tilde U \innbCnnmr} \min \sigma(\tilde U^HX^{-1}\tilde U (\tilde
-U^HA^{-1}\tilde U)^{-1})\\
-& = & \max_{V  \in {\bf V}} \min_{\tilde z \in V} (\tilde z^HX^{-1}\tilde z
-(\tilde z^HA^{-1}\tilde z)^{-1})\\
-&  = & \mu_{r+1}.
-\eeqo
-Moreover, the matrix $\tilde U = [w_{r+1}, \ldots, w_n]$ leads  to $\mu_{r+1}$.
+Let $\tilde{U} \in \C^{n \times (n-r)}$ with $\tilde{U}^H\tilde{U} = I$. By the
+Courant-Fischer theorem we obtain 
+\begin{align*}
+\lambda_{\min} (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}) & = \min_{z \in \Cnnr} \frac{z^H \tilde U X^{-1} \tilde U z }{ z^H
+(\tilde U^H A^{-1} \tilde U)^{-1}}\\
+& = \min_{ z \in \im(\tilde U)}\frac{z^{H} X^{-1}z}{z^HA^{-1}z}, 
+\end{align*}
+Thus, if $\mathbf{V}$ is the set of subspaces of $\Cnn$ of dimension $n \times
+(n-r)$, we have
+\[\max_{\tilde{U} \in \Cnnr, \, \tilde{U}^H\tilde U = I }
+\lambda_{\min} (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}) =
+\max_{\tilde{\mathcal{U}} \in \mathbf V } \min_{z \in \tilde{\mathcal{U}}}
+\frac{z^H X^{-1} z}{(z^HA^{-1}z)^{-1}}  = \mu_{r+1},
+\]
+and the maximum is attained by choosing a matrix $\tilde W =
+[\tilde w_{r+1}, \ldots, \tilde w _{n}]$ such that 
+the columns of $\tilde W$ are orthogonal in the Euclidean inner 
+product and satisfy
+$\spann\{\tilde{w}_i\}_{i=1}^n = \spann\{w_i\}_{i=1}^n$. 
 \end{proof}
 
-We then have 
+The previous lemma is the main tool to obtain the optimal interpolation
+operators.
 
 \begin{theorem}\label{theo:main}
 Let $A \innCnn$ and $ X \innCnn$ as in \eqref{mgx} be Hermitian positive
