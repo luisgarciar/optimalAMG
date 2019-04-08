@@ -253,8 +253,7 @@ optimal interpolation operators with respect to the $A$-norm in a short way,
 moreover, it also leads to optimal interpolation operators with respect to the
 spectral radius. For the symmetric two-grid method (with pre- and 
 post-smoothing)
-the optimal interpolation operators are the same. But for a two-g
-rid method with only post-smoothing the optimal interpolations (and hence the
+the optimal interpolation operators are the same. But for a two-grid method with only post-smoothing the optimal interpolations (and hence the
 optimal algebraic multigrid
 methods) are  different.  Moreover, using the  characterization of the
 spectrum,
@@ -553,8 +552,8 @@ proved in \cite[Lemma 2.3]{Zik08} that
  \|E_{TG}\|_A^2 = 1 - \frac{1}{K(V_c)},
 \]
 where  $ K(V_c)$ is  a  quantity  depending  on the  coarse space, defined by
-***
-\[ \sup_{v \in \Cn} \frac{\|(I-Q)v\|_{M^-1}^2}{\|v\|_A} \]
+(check this)
+\[ K(V_c) = \sup_{v \in \Cn} \frac{\|(I-Q)v\|_{M^{-1}}^2}{\|v\|_A} \]
 % The so called XZ-identity is used to get this   result \cite{XuZ02}
 Although  this 
 equality has been known for a long time, only  recently it was used to
@@ -618,7 +617,7 @@ where
 0 < \mu_1 \leq \mu_2 \leq \ldots \leq  \mu_n.
 \eeq
 Then
-\[\max_{\tilde U \innbCnnmr, } \lambda_{\min} (\tilde
+\[\max_{\tilde U \innbCnnmr, \tilde U^H \tilde U=I} \lambda_{\min} (\tilde
 U^HX^{-1}\tilde U
 (\tilde
 U^HA^{-1}\tilde U)^{-1}) = \mu_{r+1}
@@ -636,7 +635,8 @@ $\spann\{\tilde{w}_i\}_{i=1}^n = \spann\{w_i\}_{i=1}^n$.
 Let $\tilde{U} \in \C^{n \times (n-r)}$ with $\tilde{U}^H\tilde{U} = I$. By the
 Courant-Fischer theorem we obtain 
 \begin{align*}
-\lambda_{\min} (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}) & = \min_{z \in \Cnnr} \frac{z^H \tilde U X^{-1} \tilde U z }{ z^H
+\lambda_{\min} (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}) & =
+\min_{z \in \Cnnr} \frac{z^H \tilde U X^{-1} \tilde U z }{ z^H
 (\tilde U^H A^{-1} \tilde U)^{-1}}\\
 & = \min_{ z \in \im(\tilde U)}\frac{z^{H} X^{-1}z}{z^HA^{-1}z}, 
 \end{align*}
@@ -662,23 +662,31 @@ Let $A \innCnn$ and $ X \innCnn$ as in \eqref{mgx} be Hermitian positive
 definite. Let $
 \lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $
 be the  eigenvalues of $X^{-1}A$  and let $u_i$, $i = 1, \ldots, n$, be the
-corresponding eigenvectors. Let  $\lambda_{max}(BA) \leq 1$. Then
+corresponding eigenvectors. Let $\{(\lambda_i, u_i)\}_{i=1}^n$ be the
+eigenpairs
+of $X^{-1}A$, where $
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $,  and suppose that
+$\lambda_{\max}(BA) \leq 1$. Then
 \beq
-\min_{P} \rho(E_{M}) =  1 - \min_{P}\lambda_{min}(BA) = 1 - \lambda_{r+1}.
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}} \rho(E_{M}) =  1 - \min_{\substack{P
+\in \Cnr \\ \rank(P)=r}} \lambda_{\min}(BA) = 1 -
+\lambda_{r+1}.
 \eeq
 An optimal interpolation operator is given by 
-\[
-P_{opt} = [u_{1}, \ldots , u_r].
-\]
+\begin{equation} \label{eq:popt}
+P_{\mathrm{opt}} = [u_{1}, \ldots , u_r].
+\end{equation}
 \end{theorem}
 \begin{proof}
-Since $\lambda_{max}(BA) \leq 1$,  we have that 
+Since $\lambda_{\max}(BA) \leq 1$,  we have that 
 \beqo
-\rho(E_{M}) =  1 - \lambda_{min}(BA).
+\rho(E_{M}) =  1 - \lambda_{\min}(BA).
 \eeqo
 Note that the eigenvalues $\lambda_i $ are  the same as the $\mu_i$ in Theorem
 \ref{theo:main}.
-With  Theorem  \ref{theo:main} we need  to find vectors which are orthogonal to
+According to theorem  \ref{theo:main}, we need  to find vectors which are
+orthogonal
+to
 the eigenvectors  $w_{r+1}, \ldots , w_n$ of the generalized eigenvalue problem
 $X^{-1}w = \mu A^{-1}w$. Now, consider the vectors $u_i$, $i = 1, \ldots, r$.
 The vectors are also eigenvectors of the generalized eigenvalue problem  $Au =
@@ -686,8 +694,10 @@ The vectors are also eigenvectors of the generalized eigenvalue problem  $Au =
 eigenvalue problem $X^{-1}w = \mu A^{-1}w$. But the $w_i$ are
 $X^{-1}$-orthogonal (the $X\umha w_i$ are eigenvectors of the Hermitian matrix
 $X\uha A^{-1} X\uha$). Thus, the $u_i$, $i = 1, \ldots, r$ are  orthogonal to
-the  $w_{r+1}, \ldots , w_n$  and $P_{opt}$   leads   to the minimal value.
-\end{proof}
+the  $w_{r+1}, \ldots , w_n$ in the Euclidean inner product and the
+interpolation operator
+$P_{\mathrm{opt}}$ given by \eqref{eq:popt} is the corresponding
+minimizer. \end{proof}
 
 
 
@@ -698,13 +708,16 @@ E_{STG} & = & I - B_{STG}A, \\
 E_{TG} & = & I - B_{TG}A,
 \eeqo
 for some  matrices $B_{STG}$ and $B_{TG}$ in $\Cnn$. A straightforward
-computation shows  that  $B_{STG}$  is Hermitian. Lemma 2.11 of \cite{Ben01}
-gives
+computation shows  that  $B_{STG}$  is Hermitian, and by 
+\cite[Lemma 2.11]{Ben01} we have
 \beq \label{ben}
 \|E_{STG}\|_A = \|I - B_{STG}A\|_A = \rho(I - B_{STG}A).
 \eeq
 Moreover, the maximal eigenvalue of $B_{STG}A$ satisfies
-$\lambda_{max}(B_{STG}A) \leq 1$, see e.g. \cite{Vas08}. We then obtain
+$\lambda_{\max}(B_{STG}A) \leq 1$, see e.g. \cite[Theorem 3.16]{Vas08}.
+We
+then
+obtain
 \[
 \|E_{TG}\|_A^2 = \|E_{STG}\|_A = \rho(I - B_{STG}A) = 1 -
 \lambda_{min}(B_{STG}A).
@@ -717,35 +730,39 @@ X^{-1}_{STG} = M^{-H} +  M^{-1} - M^{-H} AM^{-1} = M^{-H}( M +  M^{H} -
 A)M^{-1}.
 \eeq
 With \eqref{eq:pos} we have  that $X_{STG}$ is Hermitian positive definite.
-Thus  we get
-
+We have thus the following corollary.
 \begin{corollary} \label{coro:one}
 Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ such $M + M^H -
-A$ is Hermitian positive definite.
-Let $X_{STG}^{-1}$  be as in \eqref{defX}.  
- Let $
-\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $
-be the  eigenvalues of $X_{STG}^{-1}A$  and let $v_i$, $i = 1, \ldots, n$, be
-the corresponding eigenvectors. Then
+A$ is Hermitian positive definite, and
+let $X_{STG}^{-1}$  be as in \eqref{defX},  and let $\{(\lambda_i,
+u_i)\}_{i=1}^n$
+be
+the eigenpairs
+of $X_{STG}^{-1}A$, where $
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $, 
+ Then
 \beq
-\min_{P} \|E_{STG}\|_A = \min_{P}\rho(E_{STG}) =  \min_{P}\|E_{TG}\|_A^2 = 1 -
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}} \|E_{STG}\|_A =
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}}\rho(E_{STG}) = 
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}}\|E_{TG}\|_A^2 = 1 -
 \lambda_{r+1}.
 \eeq
 An optimal interpolation operator is given by 
 \[
-P_{opt} = [v_{1}, \ldots , v_r].
+P_{\mathrm{opt}} = [v_{1}, \ldots , v_r].
 \]
 \end{corollary}
 \begin{proof}
-We have  that $X_{STG}$ is positive definite and $\lambda_{max}(B_{STG}A) \leq
-1$. So Theorem \ref{theo:main} gives the desired result.
+We have  that $X_{STG}$ is positive definite and $\lambda_{\max}(B_{STG}A) \leq
+1$. By Theorem \ref{theo:main} we obtain the desired result.
 \end{proof}
 
-Next  let us consider  the non symmetric  multigrid. 
+Next, let us consider  the non-symmetric multigrid method defined implicitly
+by $E_{TG}$, in \eqref{mge}.
 % For the symmetric multigird  we have that the above $P_{opt}$ minimizes both
-the $A$-norm and the spectral radius. Since $\sigma(B_{STG}A) \subset (0,1]$
-we have   $\rho(E_{STG}) = 1 - \lambda_{min}(X_{STG}^{-1}A)$. This does not
-hold for the non symmetric multigrid
+%the $A$-norm and the spectral radius. Since $\sigma(B_{STG}A) \subset (0,1]$
+%we have   $\rho(E_{STG}) = 1 - \lambda_{min}(X_{STG}^{-1}A)$. This does not
+%hold for the non symmetric multigrid
 We use a Hermitian positive  definite smoother $M^{-1}$. The matrix $X$ in
 \eqref{mgx} is given by
 \beq \label{defXtg}
@@ -754,13 +771,13 @@ X^{-1}_{TG} = M^{-1}.
 
 We have
 \beqo
-\rho(E_{TG}) = 1 - \lambda_{min}(B_{TG}A)
+\rho(E_{TG}) = 1 - \lambda_{\min}(B_{TG}A)
 \ \  \mbox{or} \ \ 
-\rho(E_{TG}) = -(1 - \lambda_{max}(B_{TG}A)).
+\rho(E_{TG}) = -(1 - \lambda_{\max}(B_{TG}A)).
 \eeqo
 
-Thus, here it is not clear, if $\lambda_{min}(B_{TG}A)$ or
-$\lambda_{max}(B_{TG}A)$  leads to the spectral radius.
+Therefore, it is not clear which of $\lambda_{\min}(B_{TG}A)$ 
+$\lambda_{\max}(B_{TG}A)$ leads to the spectral radius.
 One way to overcome  this problem is scaling. Note that we  have for all
 Hermitian positive defnite matrices $X$ and $A$ and for all matrices $\tilde U
 \in \Cnnr$
@@ -778,45 +795,38 @@ Hermitian positive defnite matrices $X$ and $A$ and for all matrices $\tilde U
 
 %and similarly
 \beqo
-& &  \max \sigma(\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1})\\
-& = &  \max_{z \innCnmr} (z^H\tilde U^HX^{-1}\tilde Uz (z^H\tilde
-U^HA^{-1}\tilde Uz)^{-1})\\
-& = &  \max_{\tilde z \in {\ran (\tilde U)} } (\tilde z^HX^{-1}\tilde z (\tilde
-z^HA^{-1}\tilde z)^{-1})\\
-& \leq & \max_{\tilde z \in \bCn } (\tilde z^HX^{-1}\tilde z (\tilde
-z^HA^{-1}\tilde z)^{-1})\\
-& = & \lambda_{max}(X^{-1}A).
+\lambda_{\max}(\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde
+U)^{-1})
+& = &  \max_{z \innCnmr} \frac{z^H\tilde U^HX^{-1}\tilde Uz}{ z^H\tilde
+U^HA^{-1}\tilde Uz}\\
+& = &  \max_{\tilde z \in {\ran (\tilde U)} } \frac{\tilde z^HX^{-1}\tilde z}{
+\tilde z^HA^{-1}\tilde z}\\
+& \leq &\max_{\tilde z \in \bCn  } \frac{\tilde z^HX^{-1}\tilde z}{
+\tilde z^HA^{-1}\tilde z}\\
+& = & \lambda_{\max}(X^{-1}A).
 \eeqo
 
 Hence, the  Hermitian smoother
 \beqo
-\hat M^{-1} = \frac{1}{\lambda_{max}(M^{-1}A)}M^{-1}
+\hat M^{-1} = \frac{1}{\lambda_{\max}(M^{-1}A)}M^{-1}
 \eeqo
 satisfies
 \beq \label{eq:spec1}
-\lambda_{max}(\hat M^{-1}A) = 1.
+\lambda_{\max}(\hat M^{-1}A) = 1.
 \eeq
 With Theorem \ref{theo:mg:eig} and $X^{-1} = \hat M^{-1}$ we then have 
 
 \beqo
-\lambda_{max} ((B_{TG}A) = 1,
+\lambda_{\max} ((B_{TG}A) = 1,
 \eeqo
 thus
 \beqo
-\rho(E_{TG}) = 1 - \lambda_{min } (B_{TG}A).
+\rho(E_{TG}) = 1 - \lambda_{\min } (B_{TG}A).
 \eeqo
 
-Note, that \eqref{eq:spec1} is equivalent to  $\hat M - A $ being positive
-semidefinite.
-
-Thus we  have 
-
+Note that \eqref{eq:spec1} is equivalent to  $\hat M - A $ being positive
+semidefinite. This discussion leads to the following corollary.
 %The matrix  $X^{-1}$ is just the smoother $M^{-H}$.
-
-
-
-
-
 \begin{corollary} \label{coro:two}
 Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ such $M - A$ is
 Hermitian positive definite.
@@ -826,22 +836,23 @@ Let $X_{TG}^{-1} =  M^{-1}$.
 be the  eigenvalues of $X_{TG}^{-1}A$  and let $x_i$, $i = 1, \ldots, n$, be
 the corresponding eigenvectors. Then
 \beq \label{eq:min.case2}
-\min_{P}\rho(E_{TG}) = 1 - \tilde \lambda_{r+1}.
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}}\rho(E_{TG}) = 1 - \tilde
+\lambda_{r+1}.
 \eeq
 An optimal interpolation operator is given by 
 \beq  \label{eq:min.case2int}
-P_{opt} = [x_{1}, \ldots , x_r].
+P_{\mathrm{opt}} = [x_{1}, \ldots , x_r].
 \eeq
 \end{corollary}
 \begin{proof}
 The matrix $X_{TG}^{-1} = M^{-1}$ is Hermitian positive definite. Moreover,
 since $M - A$ is also Hermitian positive definite the eigenvalues of
 $X_{TG}^{-1}A$ are less then  one. Thus, with Theorem \ref{theo:mg:eig},
-$\lambda_{max}(B_{TG}A) = 1$.  So, with  Theorem \ref{theo:main}  we obtain
+$\lambda_{\max}(B_{TG}A) = 1$.  So, with  Theorem \ref{theo:main}  we obtain
 \eqref{eq:min.case2} and \eqref{eq:min.case2int}.
 \end{proof}
 
-Next let us compare the optimal interpolation with respect to the $A$-norm as
+Now we will compare the optimal interpolation with respect to the $A$-norm as
 given in Corollary \ref{coro:one}, with  the optimal interpolation with respect
 to the spectral radius as given in Corollary \ref{coro:two}. Using $M=M^H$ and
 $M - A$ Hermitian positive definite, the vectors used in  Corollary
@@ -864,13 +875,12 @@ eigenvalues are  related
 by   the above polynomial. Hence, the eigenvectors corresponding  to the
 smallest eigenvalues of
 $X^{-1}_{STG}A$  are the same   eigenvectors that correspond to the smallest
-eigenvalues of $X^{-1}_{TG}A$.
-
-Hence, the optimal interpolation in Corollary \ref{coro:one}  and Corollary
-\ref{coro:two} are the same, if we assume that $M - A$ is hermitian positive
+eigenvalues of $X^{-1}_{TG}A$. Hence, the optimal interpolation in Corollary
+\ref{coro:one}  and Corollary
+\ref{coro:two} are the same, if we assume that $M - A$ is Hermitian positive
 definite.
 
-Next, let us have  a closer look to the non symmetric multigrid and avoid
+Next, let us have  a closer look to the non-symmetric two grid method and avoid
 scaling. We assume  that
 the smoother $M$ is Hermitian  and  leads to a convergent scheme, i.e.
 \beq  \label{eq:smoother:con:}
@@ -879,9 +889,9 @@ the smoother $M$ is Hermitian  and  leads to a convergent scheme, i.e.
 which implies $\sigma(M^{-1}A) \subset (0,2).$ Thus, for the matrix $E_{TG}$
 we have as above
 \beqo
-\rho(E_{TG}) = 1 - \lambda_{min}(B_{TG}^{-1}A) < 1 
+\rho(E_{TG}) = 1 - \lambda_{\min}(B_{TG}^{-1}A) < 1 
 \ \ \mbox{or} \ \
-\rho(E_{TG}) = -(1 - \lambda_{max}(B_{TG}^{-1}A)) < 1.
+\rho(E_{TG}) = -(1 - \lambda_{\max}(B_{TG}^{-1}A)) < 1.
 \eeqo
 
 Let 
@@ -894,24 +904,24 @@ Then we have $\sigma(Z) \subset (0,2)$ and with  Theorem \ref{theo:mg:eig}
 \sigma(E_{TG}) = \{0\} \cup \sigma(I-Z).
 \eeqo
 But $\sigma(I-Z) \subset (-1,1) $. To minimize the spectral radius of $E_{TG}$
-over all interpolation we consider the matrix $(I - Z)^2$. We  obtain
-
-
+over all interpolation we consider the matrix $(I - Z)^2$. Our next theorem
+deals with this case.
 
 \begin{theorem} \label{theo:main2}
-Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ be Hermitian
+Let  $A\inCnn$  be Hermitian positive definite, and let $ M \inCnn$ be
+Hermitian
 such $\rho(I - M^{-1}A) < 1$.
-Let $X_{TG}^{-1} =  M^{-1}$.   
- Let $
-\hat \lambda_1 \leq \hat \lambda_2 \leq \ldots \leq  \hat \lambda_n $
-be the  eigenvalues of $(I - X_{TG}^{-1}A)^2$  and let $y_i$, $i = 1, \ldots,
-n$, be the corresponding eigenvectors. Then
+Let $X_{TG}^{-1} =  M^{-1}$,
+and let $\{(\lambda_i,y_i)\}_{i=1}^n$ be the eigenpairs of $(I -
+X_{TG}^{-1}A)^2$ with $
+\hat \lambda_1 \leq \hat \lambda_2 \leq \ldots \leq  \hat \lambda_n $. Then
 \beq \label{eq:min.case3}
-\min_{P}\rho(E_{TG}) = (\hat \lambda_{n-r})^{\frac{1}{2}}.
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}}\rho(E_{TG}) = (\hat
+\lambda_{n-r})^{\frac{1}{2}}.
 \eeq
 An optimal interpolation operator is given by 
 \beq  \label{eq:min.case3int}
-P_{opt} = [y_{n-r+1}, \ldots , y_n].
+P_{\mathrm{opt}} = [y_{n-r+1}, \ldots , y_n].
 \eeq
 \end{theorem}
 \begin{proof}
@@ -947,12 +957,12 @@ eigenvectors for which the smoothing is slowest to converge.
 
 
 
-Note  that for symmetric multigrid with  $M + M^H - A$ Hermitian  positive
+Note  that for symmetric multigrid where  $M + M^H - A$ is Hermitian  positive
 definite  the largest eigenvalue of
 $B_{STG}A$ is one (see e.g. \cite{Not15}).  As seen in the proof of Corollary
 \ref{coro:two}, the same holds  for  $B_{TG}A$ when we assume  that  $M - A$ is
 Hermitian  positive definite. The later
-assumption can be obtained  by scaling, however, this scaling effectes the
+assumption can be obtained  by scaling, however, this scaling affects the
 spectral radius of the
 error propagation matrix. But for the condition number of the multigrid
 preconditioned system, this scaling has no effect.
@@ -960,67 +970,70 @@ preconditioned system, this scaling has no effect.
 Theorem \ref{theo:mg:eig} characterizes the  spectrum of $B_{STG}A$ and
 $B_{TG}A$. Following the arguments above, where   we found optimal
 interpolation operators, such that
-$\lambda_{min}(B_{STG}A)$ and $\lambda_{min}(B_{TG}A)$ are maximal, we obtain
+$\lambda_{\min}(B_{STG}A)$ and $\lambda_{\min}(B_{TG}A)$ are maximal, we obtain
 that the same interpolation operators are optimal with respect to the condition
-number $\kappa$ of the preconditioned system. We then have
+number $\kappa$ of the preconditioned system. This leads to the next result.
 
  \begin{theorem}
 Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ such $M + M^H -
 A$ is Hermitian positive definite.
 Let $X_{STG}^{-1}$  be as in \eqref{defX}.  
- Let $
-\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $
-be the  eigenvalues of $X_{STG}^{-1}A$  and let $v_i$, $i = 1, \ldots, n$, be
-the corresponding eigenvectors. Then
+ Let $\{(\lambda_i,v_i)\}_{i=1}^n$ be the eigenpairs of $X_{STG}^{-1}A$, where
+$
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $. Then
 \beq
-\min_P \kappa(B_{STG}A) = \frac{1}{\lambda_{r+1}}.
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}} \kappa(B_{STG}A) =
+\frac{1}{\lambda_{r+1}}.
 \eeq
 An optimal interpolation operator is given by 
 \[
-P_{opt} = [v_{1}, \ldots , v_r].
+P_{\mathrm{opt}} = [v_{1}, \ldots , v_r].
 \]
 \end{theorem}
   
-For the non symmetric multigrid we obtain
+Our final result gives the optimal interpolation operator for the non-symmetric
+two-grid
+method with respect to the condition number $\kappa$.
 
 \begin{theorem}
 Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ be Hermitian
 positive definite  such that $\rho(I - M^{-1}A) < 1.$
-Let $X_{TG}^{-1} =  M^{-1}$.   
- Let $
-\tilde \lambda_1 \leq \tilde \lambda_2 \leq \ldots \leq  \tilde \lambda_n $
-be the  eigenvalues of $X_{TG}^{-1}A$  and let $x_i$, $i = 1, \ldots, n$, be
-the corresponding eigenvectors. Then
+Let $X_{TG}^{-1} =  M^{-1}$, and let $\{(\tilde, \ ambda_i, x_i)\}_{i=1}^n$ be 
+the eigenpairs of $X_{TG}^{-1}A$  where  $
+\tilde \lambda_1 \leq \tilde \lambda_2 \leq \ldots \leq  \tilde \lambda_n $. Then
 \beqo
-\min_P \kappa(B_{TG}A) = \frac{1}{\tilde \lambda_{r+1}}
+\min_{\substack{P \in \Cnr \\ \rank(P)=r}}  \kappa(B_{TG}A) = \frac{1}{\tilde
+\lambda_{r+1}}
 \eeqo
 An optimal interpolation operator is given by 
 \beqo
-P_{opt} = [x_{1}, \ldots , x_r].
+P_{\mathrm{opt}} = [x_{1}, \ldots , x_r].
 \eeqo
 \end{theorem}
 
 Note, that  in all cases of the previous sections any other interpolation
-operator $\tilde P$  with  $\ran (\tilde P) = \ran (P_{opt})$ is also optimal.
+operator $\tilde P$  with  $\ran (\tilde P) = \ran (P_{\mathrm{opt}})$ is also
+optimal.
 
 \section{Conclusion}
-As mentioned in \cite{XuZ17} the  $A$ in AMG methods can be seen as an $A$ for 
+As mentioned in \cite{XuZ17}, the  $A$ in AMG methods can also be understood as
+an
+$A$
+for
 Abstract 
 Multigrid Methods. Here  we contributed to the  theory of  
-abstract multigrid methods. Based on a characterization of the spectrum of the
-error propagation operator and the preconditioned system of two-grid methods
+abstract multigrid methods by presenting alternate derivations of previously
+known results. Building on a  result from \cite{GarKN18} which gives a
+characterization of the spectrum of the
+error propagation operator and the preconditioned system of two-grid methods,
 we derived optimal interpolation operators with respect  to the $A$-norm and
 the spectral radius of the  error propagation operator matrix in a
-short way. For the symmetric multigrid method (pre- and  post-smoothing) the
-optimal interpolation operators are  the same. But for post-smoothing only
-multigrid the optimal interpolations and hence the optimal algebraic multigrid
+short way. For the symmetric two-grid method (pre- and  post-smoothing) the
+optimal interpolation operators are  the same. But for a two-grid
+method with only post-smoothing
+the optimal interpolations and hence the optimal algebraic multigrid
 methods are different. We also showed that these interpolation operators
 are optimal  with respect to the condition number of the preconditioned system.
-
-
-
-
-
 
 \bibliographystyle{siamplain}
 %\bibliographystyle{siam}
