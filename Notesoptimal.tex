@@ -253,7 +253,8 @@ optimal interpolation operators with respect to the $A$-norm in a short way,
 moreover, it also leads to optimal interpolation operators with respect to the
 spectral radius. For the symmetric two-grid method (with pre- and 
 post-smoothing)
-the optimal interpolation operators are the same. But for a two-grid method with only post-smoothing the optimal interpolations (and hence the
+the optimal interpolation operators are the same. But for a two-grid method
+with only post-smoothing the optimal interpolations (and hence the
 optimal algebraic multigrid
 methods) are  different.  Moreover, using the  characterization of the
 spectrum,
@@ -595,7 +596,8 @@ Hermitian positive definite and that
 $\lambda_{\max}(BA)$ is at most one, we have
 $\rho(E_M) = 1 - \lambda_{\min}(BA)$. In order to find an optimal interpolation
 operator for the error propagation matrix,  we need  to first find
-\[  \tilde{U}^\star \in \argmax_{\tilde U \innbCnnmr,\, \tilde U^H\tilde U = I}
+\[  \tilde{U}^\star \in \argmax_{\tilde U \innbCnnmr,\, \tilde
+U^H\tilde U = I}
 \lambda_{\min}(\tilde
 U^HX^{-1}\tilde
 U
@@ -617,7 +619,7 @@ where
 0 < \mu_1 \leq \mu_2 \leq \ldots \leq  \mu_n.
 \eeq
 Then
-\[\max_{\tilde U \innbCnnmr, \tilde U^H \tilde U=I} \lambda_{\min} (\tilde
+\[\max_{\tilde U \innbCnnmr, \, \tilde U^H \tilde U=I} \lambda_{\min} (\tilde
 U^HX^{-1}\tilde U
 (\tilde
 U^HA^{-1}\tilde U)^{-1}) = \mu_{r+1}
@@ -927,12 +929,16 @@ P_{\mathrm{opt}} = [y_{n-r+1}, \ldots , y_n].
 \begin{proof}
 Using the theorem of Courant and Fischer and Theorem \ref{theo:mg:eig} we have
 \beqo
-& & \min_{\tilde U} \max \sigma((I - Z)^2) \\
-& = & \min_{\tilde U} \max \sigma( ((\tilde U^HA^{-1}\tilde U - \tilde
+& & \min_{\tilde U \innbCnnmr, \, \tilde U^H \tilde U=I} \lambda_{\max}((I -Z)^2) \\
+& = & \min_{\tilde U \innbCnnmr, \, \tilde U^H \tilde U=I}
+\lambda_{\max}((\tilde U^HA^{-1}\tilde U -
+\tilde
 U^HX_{TG}^{-1}\tilde U) (\tilde U^HA^{-1}\tilde U)^{-1})^2)\\
-& = & \min_{\tilde U} \max_{z \in \bC ^{n-r}}  ((z^H(\tilde U^HA^{-1}\tilde U -
+& = & \min_{\tilde U \innbCnnmr, \, \tilde U^H \tilde U=I} \max_{z \in \bC
+^{n-r}}  ((z^H(\tilde U^HA^{-1}\tilde U -
 \tilde U^HX_{TG}^{-1}\tilde U)z) (z^H\tilde U^HA^{-1}\tilde Uz)^{-1})^2)\\
-& = & \min_{\tilde U} \max_{y \in \ran (\tilde U)}  ((y^H(A^{-1} -
+& = & \min_{\tilde U \innbCnnmr, \, \tilde U^H \tilde U=I} \max_{y \in \ran
+(\tilde U)}  ((y^H(A^{-1} -
 X_{TG}^{-1})y) (y^HA^{-1}y)^{-1})^2)\\
 & = & \hat \lambda_{n-r}.
 \eeqo
@@ -941,15 +947,12 @@ The optimal interpolation is then given by \eqref{eq:min.case3int}.
 \end{proof}
 
 
-Note, the above Theorem \ref{theo:main2} and  Corollary \ref{coro:one} lead to
-clear statements. The optimal interpolation operators are given by those
+Note that the above Theorem \ref{theo:main2} and  Corollary \ref{coro:one}
+correspond to
+clear statements: the optimal interpolation operators are given
+by
+those
 eigenvectors for which the smoothing is slowest to converge.
-
-
-
-
-
-
 
 \section{The optimal interpolation with respect to the  condition number}
 
@@ -1000,7 +1003,8 @@ Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ be Hermitian
 positive definite  such that $\rho(I - M^{-1}A) < 1.$
 Let $X_{TG}^{-1} =  M^{-1}$, and let $\{(\tilde, \ ambda_i, x_i)\}_{i=1}^n$ be 
 the eigenpairs of $X_{TG}^{-1}A$  where  $
-\tilde \lambda_1 \leq \tilde \lambda_2 \leq \ldots \leq  \tilde \lambda_n $. Then
+\tilde \lambda_1 \leq \tilde \lambda_2 \leq \ldots \leq  \tilde \lambda_n $.
+Then
 \beqo
 \min_{\substack{P \in \Cnr \\ \rank(P)=r}}  \kappa(B_{TG}A) = \frac{1}{\tilde
 \lambda_{r+1}}
