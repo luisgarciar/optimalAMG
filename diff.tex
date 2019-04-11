@@ -1,0 +1,1377 @@
+\documentclass[final]{siamltex}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL Notesoptimal_old.tex   Wed Mar 27 16:51:52 2019
+%DIF ADD Notesoptimal.tex       Wed Apr 10 14:08:32 2019
+%DIF 2-5c2-4
+%DIF < 
+%DIF < %written by Reinhard January 23 2019
+%DIF < % upadted by Reinhard  Feb. 1
+%DIF < % upadted by Reinhard  Feb. 5
+%DIF -------
+% written by Reinhard January 23 2019 %DIF > 
+% updated by Reinhard  Feb. 1 %DIF > 
+% updated by Reinhard  Feb. 5 %DIF > 
+%DIF -------
+% updated by Reinhard March 21
+% updated by Reinhard March 25 
+% updated by Reinhard March 26
+
+\usepackage{graphicx,amsmath,amsfonts,color,a4,pifont}
+\usepackage{latexsym,amssymb,epsf,subfigure}
+%DIF 12a11-12
+\usepackage{lineno} %DIF > 
+\linenumbers %DIF > 
+%DIF -------
+%\usepackage[hyperref=true, url=false,
+%            isbn=false,
+%            backref=true,
+%            style=custom-numeric-comp,
+%            citereset=chapter,
+%            maxcitenames=3,
+%            maxbibnames=100,
+%            block=none]{biblatex}
+
+\usepackage[T1]{fontenc}
+\usepackage[dvips]{epsfig}
+\usepackage[dvips]{graphicx}
+\usepackage{pifont}
+\usepackage{ifthen}
+\usepackage{float} 
+\usepackage[algoruled,titlenumbered]{}
+\usepackage{hyperref} 
+\usepackage{cite}
+%\usepackage{refcheck}
+
+
+
+
+\newtheorem{assumption}{Assumption}
+\newtheorem{remark}{Remark}
+\newtheorem{observation}{Observation}
+\newtheorem{example}{Example}
+
+%\newcommand{\mat}{\left[ \begin{array}{c}  }
+%\newcommand{\rix}{\end{array} \right] }
+
+\newcommand{\uha}{^{\frac{1}{2}}}
+\newcommand{\umha}{^{-\frac{1}{2}}}
+
+\newcommand{\cgi}{ZE^{-1}Z^T}
+\newcommand{\muha}{^{-\frac{1}{2}}}
+\newcommand{\innbnR}{\in\mathbb{R}^{n\times n}}
+\newcommand{\innbrR}{\in\mathbb{R}^{n\times r}}
+\newcommand{\innbsR}{\in\mathbb{R}^{n\times s}}
+\newcommand{\innCnn}{\in\mathbb{C}^{n\times n}}
+\newcommand{\innCrr}{\in\mathbb{C}^{r\times r}}
+\newcommand{\innCrn}{\in\mathbb{C}^{r\times n}}
+\newcommand{\innCnr}{\in\mathbb{C}^{n\times r}}
+\newcommand{\innbnC}{\in\mathbb{C}^{n\times n}}
+\newcommand{\innbCnnmr}{\in\mathbb{C}^{n\times n-r}}
+\newcommand{\innCnmr}{\in\mathbb{C}^{n-r}}
+
+\newcommand{\R} {\mathbb{R}}
+\newcommand{\bR} {\mathbb{R}}
+\newcommand{\bRnn} {\mathbb{R}^{n \times n}}
+
+\DeclareMathOperator*{\dimn}{dim}
+\DeclareMathOperator*{\rankn}{rank}
+\DeclareMathOperator*{\spann}{span}
+%DIF 66c67
+%DIF < 
+%DIF -------
+\DeclareMathOperator*{\argmax}{argmax} %DIF > 
+%DIF -------
+
+\newcommand{\padef} {P_{\mathrm{ADEF}}}
+\newcommand{\U}{\mathcal{U}}
+
+
+\newcommand{\Up}{\mathcal{U}^\perp}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Z}{\mathcal{Z}}
+\newcommand{\V}{\mathcal{V}}
+
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\L}{\mathcal{L}}
+
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\cA}{\mathcal{A}}
+
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\N}{\mathbf{N}}
+\renewcommand{\S}{\mathbf{S}}
+\newcommand{\D}{\mathbf{D}}
+\renewcommand{\P}{\mathbf{P}}
+%\newcommand{\R}{\mathbf{R}}
+\newcommand{\J}{\mathbf{J}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\vc}{\mathbf{v}}
+\newcommand{\f}{\mathbf{f}}
+\newcommand{\Uc}{\mathbf{U}}
+
+
+
+
+\newcommand{\g}{\mathbf{g}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\Ww}{\mathbf{W}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\Hh}{\mathbf{D}}
+
+
+\newcommand{\Upd}{U_{\perp}}
+
+
+
+\newcommand{\nquad}{\mathbb{R}^{n,n}}
+\newcommand{\rquad}{\mathbb{R}^{r,r}}
+\newcommand{\rrec}{\mathbb{R}^{n,r}}
+\newcommand{\trec}{\mathbb{R}^{n,t}}
+\newcommand{\esym}{Z^TAZ}
+\newcommand{\enotsym}{Y^TAZ}
+\newcommand{\qnotsym}{ZE^+Y^T}
+\newcommand{\indi}{\mathcal{I}}
+\newcommand{\indj}{\mathcal{J}}
+\newcommand{\svdy}{U_Y\Sigma_Y V_Y^T}
+\newcommand{\svdz}{U_Z\Sigma_Z V_Z^T}
+\newcommand{\onevec}{\mathbbm{1}}
+\newcommand{\coloneq}{\mathrel{\mathop:}=}
+\newcommand{\eqcolon}{=\mathrel{\mathop:}}
+\newcommand{\cupdot}{\stackrel{\cdot}{\cup}}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+
+\newcommand{\beqo}{\begin{eqnarray*}}
+\newcommand{\beq}{\begin{eqnarray}}
+\newcommand{\eeqo}{\end{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray}}
+%\newcommand{\bproof}{{\bf Proof: \ }}
+%\newcommand{\eproof}{\hfill q.e.d. \\ }
+%\newcommand{\eproof}{\hfill $\Box $ \\ }
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+%\onehalfspace
+
+%\DeclareMathOperator{\im}{im}
+%\DeclareMathOperator{\span}{span}
+
+
+
+
+
+\newcommand{\matr}[2]{\left[ \begin{array}{#1} #2 \end{array} \right]}
+\newcommand{\mat}{\left[ \begin{array}{c}  }
+\newcommand{\rix}{\end{array} \right] }
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\newcommand{\nrm}[2][]{\ensuremath{\left\|#2\right\|_{#1}}}
+\newcommand{\nn}{\nonumber}
+
+
+
+\newcommand{\Esym}{U^TAU}
+\newcommand{\PDS}{I - AU(U^TAU)^{-1}U^T}
+
+
+\numberwithin{equation}{section}
+
+
+
+\newcommand{\im} {{\cal R}}
+\newcommand{\kernal} {{\cal N}}
+\newcommand{\nsp} {{\cal N}}
+\newcommand{\ran} {{\cal R}}
+\newcommand{\nul} {{\cal N}}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bCn}{\mathbb{C}^n}
+\newcommand{\Kr}{\mathcal{K}}
+\newcommand{\Cn}{\mathbb{C}^n}
+\newcommand{\Cnn}{\mathbb{C}^{n \times n}}
+\newcommand{\Crn}{\mathbb{C}^{r \times n}}
+\newcommand{\Cnr}{\mathbb{C}^{n \times r}}
+\newcommand{\Cnnr}{\mathbb{C}^{n \times n-r}}
+\newcommand{\Crnn}{\mathbb{C}^{n-r \times n}}
+\newcommand{\Cnmr}{\mathbb{C}^{n-r \times n-r}}
+\newcommand{\inCnn}{\in \mathbb{C}^{n \times n}}
+\newcommand{\Crr}{\mathbb{C}^{r \times r}}
+\newcommand{\Projj}[2]{P_{\mathcal{#1},\mathcal{#2}}}
+\newcommand{\Proj}[1]{P_{\mathcal{#1}}}
+
+
+
+
+
+%\newcommand{\smat}[1]{\left[\begin{smallmatrix} #1\end{smallmatrix}\right]}
+%\newcommand{\nquad}{\mathbb{R}^{n,n}}
+%\newcommand{\rquad}{\mathbb{R}^{r,r}}
+%\newcommand{\rrec}{\mathbb{R}^{n,r}}
+%\newcommand{\trec}{\mathbb{R}^{n,t}}
+%\newcommand{\esym}{Z^TAZ}
+%\newcommand{\enotsym}{Y^TAZ}
+%\newcommand{\qnotsym}{ZE^+Y^T}
+%\newcommand{\indi}{\mathcal{I}}
+%\newcommand{\indj}{\mathcal{J}}
+%\newcommand{\svdy}{U_Y\Sigma_Y V_Y^T}
+%\newcommand{\svdz}{U_Z\Sigma_Z V_Z^T}
+%\newcommand{\onevec}{\mathbbm{1}}
+%\newcommand{\coloneq}{\mathrel{\mathop:}=}
+%\newcommand{\eqcolon}{=\mathrel{\mathop:}}
+%\newcommand{\cupdot}{\stackrel{\cdot}{\cup}}
+%\renewcommand{\labelenumi}{(\alph{enumi})}
+
+
+
+\author{
+Luis Garc\'{i}a Ramos\footnotemark[1]
+\and
+Reinhard Nabben\footnotemark[1]
+}
+
+
+
+\title{On \DIFdelbegin \DIFdel{optimal algebraic multigrid methods}\DIFdelend \DIFaddbegin \DIFadd{Optimal Algebraic Multigrid Methods}\DIFaddend }
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+
+\maketitle
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[1]{
+Technische Universit\"at Berlin, Institut f\"ur Mathematik, Stra\ss e des 17.
+Juni 136, D-10623 Berlin,
+Germany
+ (\{garcia, nabben\}@math.tu-berlin.de). 
+}
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\begin{abstract}
+In this note we \DIFdelbegin \DIFdel{give an alternative approach  to establish }\DIFdelend \DIFaddbegin \DIFadd{present an alternative way to obtain }\DIFaddend optimal
+interpolation operators \DIFdelbegin \DIFdel{of }\DIFdelend \DIFaddbegin \DIFadd{for }\DIFaddend two-grid methods applied to Hermitian positive
+definite \DIFaddbegin \DIFadd{linear }\DIFaddend systems.  In \cite{FalVZ05,Zik08} the $A$-norm of the error
+propagation operator of algebraic multigrid methods is characterized. These
+results are just recently used in \cite{XuZ17, Bra18} to determine optimal
+interpolation operators. Here we use a characterization not of the $A$-norm but
+of the spectrum of the  error propagation operator of two-grid methods\DIFaddbegin \DIFadd{, }\DIFaddend which
+was proved in  \cite{GarKN18}. This characterization holds for arbitrary
+matrices. For Hermitian positive definite systems this result   leads to
+optimal interpolation operators with respect to the $A$-norm in a short way\DIFdelbegin \DIFdel{. But }\DIFdelend \DIFaddbegin \DIFadd{, 
+moreover, }\DIFaddend it also leads to optimal interpolation operators with respect to the
+spectral radius. For the symmetric \DIFdelbegin \DIFdel{multigrid method (}\DIFdelend \DIFaddbegin \DIFadd{two-grid method (with }\DIFaddend pre- and 
+post-smoothing)
+the optimal interpolation operators are the same. But for \DIFdelbegin \DIFdel{post-smoothing only multigrid }\DIFdelend \DIFaddbegin \DIFadd{a two-grid method
+with only post-smoothing }\DIFaddend the optimal interpolations \DIFaddbegin \DIFadd{(}\DIFaddend and hence the
+optimal algebraic multigrid
+methods\DIFaddbegin \DIFadd{) }\DIFaddend are  different.  Moreover, using the  characterization of the
+spectrum,
+we can show that the found  optimal interpolation operators are also optimal
+with
+respect to the condition number of the multigrid preconditioned system.  
+\end{abstract}
+
+
+\begin{keywords}
+multigrid, optimal interpolation operator, two-grid methods
+\end{keywords}
+
+\begin{AMS}
+65F10, 65F50, 65N22, 65N55.
+\end{AMS}
+
+\pagestyle{myheadings}
+\thispagestyle{plain}
+\markboth{L. Garc\'{i}a Ramos, R. Nabben} {\DIFdelbegin \DIFdel{optimal algebraic multigrid}\DIFdelend \DIFaddbegin \DIFadd{Optimal Algebraic Multigrid}\DIFaddend }
+
+\section{Introduction}
+Typical multigrid methods to solve the linear system 
+\[
+Ax = b,
+\]
+where $A$ is an $n \times n$ matrix, consist  of two ingredients, the smoothing
+and  the
+coarse grid correction. The smoothing is \DIFdelbegin \DIFdel{mostly done by one or just }\DIFdelend \DIFaddbegin \DIFadd{typically done by }\DIFaddend a
+few
+steps of a basic stationary iterative method\DIFaddbegin \DIFadd{, }\DIFaddend like the Jacobi or Gauss-Seidel
+method.  For the coarse grid correction\DIFaddbegin \DIFadd{,
+ }\DIFaddend a {\it prolongation\DIFdelbegin \DIFdel{or interpolation
+operator}\DIFdelend \DIFaddbegin } \DIFadd{or }{\it \DIFadd{interpolation}\DIFaddend }
+\DIFaddbegin \DIFadd{operator }\DIFaddend $P \in \Cnr$ and a   {\it
+restriction\DIFdelbegin \DIFdel{operator}\DIFdelend } \DIFaddbegin \DIFadd{operator }\DIFaddend $R \in \Crn$  are needed. The coarse grid matrix is then
+defined as
+\beq \label{def:multAC}
+A_C :=  RAP \innCrr.
+\eeq 
+
+Here we always assume  that $A$ and $A_C$ are  non-singular. 
+%Then
+%let
+%\beq \label{def:multQPD}
+%Q := PA_C^{-1}R.
+%\eeq
+The \DIFdelbegin \DIFdel{typical }\DIFdelend multigrid or algebraic multigrid (AMG) \DIFdelbegin \DIFdel{iteration or }\DIFdelend error
+propagation matrix  is then given by
+ \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD <  %%%
+\DIFdelend \beq \label{mgiteration}
+E_M = (I-M_2^{-1}A)^{\nu_2}(I -  PA_C^{-1}RA)(I-M_1^{-1}A)^{\nu_1},
+\eeq
+where $M_1^{-1} \innCnn$ and $M_2^{-1} \innCnn$  are   {\it smoothers}, $\nu_1$
+and $\nu_2$  are the number of \DIFdelbegin \DIFdel{smoothing steps }\DIFdelend \DIFaddbegin \DIFadd{pre- }\DIFaddend and \DIFaddbegin \DIFadd{post-smoothing steps respectively, and
+}\DIFaddend $PA_C^{-1}R$
+is
+the
+{\it
+coarse grid
+correction} matrix. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend The multigrid method is convergent if and only if the
+spectral radius of \DIFdelbegin \DIFdel{$E_M$, i.e. }\DIFdelend \DIFaddbegin \DIFadd{the
+error propagation matrix
+}\DIFaddend $\rho(E_m)$ \DIFdelbegin \DIFdel{, }\DIFdelend is less than one.
+\DIFdelbegin \DIFdel{Often not the spectral radius but a consistent norm $\|.\|$ of $E_M$ is considered. Note that 
+}\DIFdelend \DIFaddbegin \DIFadd{Alternatively, the norm of the error propagation matrix $\|E_M\|$ 
+can be considered, where
+$\|\cdot\|$
+is
+a
+consistent matrix
+norm, and in this case one has  
+}\DIFaddend \[
+\rho(E_M) \leq \|E_M\|.
+\]  
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend The aim of algebraic multigrid methods is to balance the interplay between
+smoothing and coarse grid correction steps. However, most of the existing AMG
+methods first fix a smoother and then optimize a certain quantity to choose
+the interpolation $P$ and restriction $R$.
+%DIF < Prolongation and restriction operators are called optimal if $\rho(E_M)$ is minimal. 
+
+%DIF < %%%%%  Theoretical results for multigrid methods are mostly obtained for symmetric positive definite  matrices
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < 
+%DIF < If the spectral radius of $E_M$ is less  than one there is a non-singular matrix
+%DIF < $B$  such that
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{The matrix }\DIFdelend \DIFaddbegin \DIFadd{To simplify the analysis, we assume that there exists a non-singular matrix $X$
+such that
+}\beq \label{mgx}
+\DIFadd{(I-X^{-1}A) = (I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2},
+}\eeq
+\DIFadd{it can be shown that such a matrix $X$ exists if the spectral radius of $
+(I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2}$ is less  than one, see e.g.
+\mbox{%DIFAUXCMD
+\cite{BenS97}}\hspace{0pt}%DIFAUXCMD
+. Moreover, note that the matrix }\DIFaddend $E_M$ can be
+written  as 
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD <  %%%
+\DIFdelend \beq \label{mgb}
+E_M = I-BA,
+\eeq
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend where the  matrix $B$ \DIFdelbegin \DIFdel{also acts }\DIFdelend \DIFaddbegin \DIFadd{is known }\DIFaddend as the multigrid preconditioner\DIFdelbegin \DIFdel{. Therefore
+}\DIFdelend \DIFaddbegin \DIFadd{, i.e., $B$ is an
+approximation of $A^{-1}$.
+Therefore,
+}\DIFaddend eigenvalue estimates of $BA$ are of interest\DIFdelbegin \DIFdel{. Note that  }\DIFdelend \DIFaddbegin \DIFadd{, and  they also lead to
+estimates for
+}\DIFaddend the eigenvalues of
+$E_M$\DIFdelbegin \DIFdel{are just one  minus the eigenvalues of $BA$}\DIFdelend .
+
+%DIF > Prolongation and restriction operators are called optimal if $\rho(E_M)$ is
+%DIF > minimal.
+\DIFaddbegin 
+
+%DIF > %%%%%  Theoretical results for multigrid methods are mostly obtained for
+%DIF > symmetric positive definite  matrices
+%DIF > 
+%DIF > If the spectral radius of $E_M$ is less  than one there is a non-singular
+%DIF > matrix
+%DIF > $B$  such that
+
+\DIFaddend %Next  we will consider  the case $\nu_1 = 1$, $\nu_2 = 0$. We obtain
+% \beqo 
+%T = (I-M_2^{-1}A)(I - QA).
+%\eeqo
+%Hence, 
+%\beqo
+%T & = & I - M_2^{-1}A -QA  + M_2^{-1}AQA\\
+%& = &  I - ( M_2^{-1}  + Q  - M_2^{-1}AQ)A \\
+%& = & I - ( M_2^{-1} P_D + Q)A. 
+%\eeqo
+%Therefore, the matrix $B$ in \eqref{mgb} is 
+%\beqo
+%B =  M_2^{-1} P_D + Q,
+%\eeqo
+%with $P_D = I-AQ$.
+%Thus $B$  is just  $P_{ADEF}$, the   adapted deflation preconditioner. 
+
+%For  $\nu_1 = 1$ and $\nu_2 = 0$
+%we have 
+%\beqo
+%T = (I - QA)(I-M_1^{-1}A).
+%\eeqo
+%Hence, 
+%\beqo
+%T & = & I - QA - M_1^{-1}A + QAM_1^{-1}A \\ 
+%& = & I - (Q + M_1^{-1} - QAM_1^{-1})A\\
+%& = & I - (Q_D M_1^{-1} + Q)A.
+%\eeqo
+%Thus,  the matrix $B$ in \eqref{mgb} is 
+%\beqo
+%B = Q_D M_1^{-1} + Q.
+%\eeqo
+
+%Now, let us consider  the general case, i.e.  $T$ is  given as in
+%\eqref{mgiteration}.
+\DIFdelbegin \DIFdel{We assume that there is a
+non-singular matrix $X$ such that
+}%DIFDELCMD < \beq %DIFDELCMD < \label{mgx}%%%
+%DIFDELCMD < %%%
+\DIFdel{(I-X^{-1}A) = (I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2}.
+}%DIFDELCMD < \eeq
+%DIFDELCMD < %%%
+\DIFdel{If the spectral radius of $
+(I-M_1^{-1}A)^{\nu_1}(I-M_2^{-1}A)^{\nu_2}$ is less  than one, then  there
+exists such a
+matrix  $X$, see e.g. \mbox{%DIFAUXCMD
+\cite{BenS97}}\hspace{0pt}%DIFAUXCMD
+.
+}\DIFdelend 
+
+%DIF > then  thereexists such amatrix  $X$, 
+The following theorem, proved by \DIFdelbegin \DIFdel{Garcia}\DIFdelend \DIFaddbegin \DIFadd{Garc}{\DIFadd{\'i}}\DIFadd{a Ramos}\DIFaddend , Kehl  and Nabben in
+\cite{GarKN18},
+gives a characterization of the spectrum \DIFdelbegin \DIFdel{$\sigma(BA)$ }\DIFdelend of $BA$\DIFaddbegin \DIFadd{, }\DIFaddend and hence a
+characterization of the spectrum of the general error propagation matrix $E_M$.
+\DIFdelbegin \DIFdel{It holds  for arbitrary matrices $A$. 
+}\DIFdelend 
+
+\begin{theorem} \label{theo:mg:eig}
+Let $A \innCnn$ be  non-singular\DIFdelbegin \DIFdel{. Let   }\DIFdelend \DIFaddbegin \DIFadd{, and let   }\DIFaddend $P \innCnr $ and  $R \innCrn $ such
+that $RAP$ is non-singular. Moreover, let $M_1 \innCnn$ and $M_2 \innCnn $ \DIFaddbegin \DIFadd{be
+}\DIFaddend such  that  that the matrices $X$ in \eqref{mgx} and $RXP$ are  non-singular.
+Then \DIFaddbegin \DIFadd{the following statements hold:
+}\begin{enumerate}
+\item[(a)] \DIFadd{The multigrid preconditioner }\DIFaddend $B$ in
+\eqref{mgb}  is non-singular. 
+\DIFdelbegin \DIFdel{Let }\DIFdelend \DIFaddbegin 
+
+\item[(b)] \DIFadd{If }\DIFaddend $\tilde P, \tilde R \in \bC^{n \times n-r}$ \DIFaddbegin \DIFadd{are matrices
+}\DIFaddend such that the columns  of
+$\tilde P$ and $\tilde R $ \DIFdelbegin \DIFdel{build  }\DIFdelend \DIFaddbegin \DIFadd{form  }\DIFaddend orthonormal  bases of $(\im
+(P))^\perp$ and
+$(\im (R^{H}))^\perp$ \DIFdelbegin \DIFdel{. Then  $\tilde P^HA^{-1}\tilde R$ is non-singular and }\DIFdelend \DIFaddbegin \DIFadd{(the orthogonal complements of $\im
+(P)$ and $\im (R^{H}$ in the Euclidean inner product)  respectively,
+then
+the
+matrices
+$\tilde
+P^HA^{-1}\tilde
+R$ and $P^HX^{-1}\tilde R$
+are
+non-singular
+and the spectrum of
+}\DIFaddend $BA$  \DIFdelbegin \DIFdel{has the eigenvalue one  with multiplicity $r$,
+the other eigenvalues are
+nonzero and are   the eigenvalues of
+}\DIFdelend \DIFaddbegin \DIFadd{is given by
+}\DIFaddend \[\DIFaddbegin \DIFadd{\sigma(BA) = \{1\} \cup \sigma(}\DIFaddend \tilde P^HX^{-1}\tilde R (\tilde
+P^HA^{-1}\tilde
+R)^{-1}\DIFdelbegin \DIFdel{, 
+}\DIFdelend \DIFaddbegin \DIFadd{).}\DIFaddend \]
+\DIFdelbegin \DIFdel{i.e.
+}\[
+\DIFdel{\sigma(BA) = \{1\} \cup \sigma(\tilde P^HX^{-1}\tilde R (\tilde P^HA^{-1}\tilde R)^{-1}). 
+}\]
+%DIFAUXCMD
+\DIFdelend %DIF > where the eigenvalue one  with multiplicity $r$, the other eigenvalues are
+%DIF > nonzero and are   the eigenvalues of 
+%DIF > \[
+%DIF > \tilde P^HX^{-1}\tilde R (\tilde P^HA^{-1}\tilde R)^{-1}, 
+%DIF > \]
+%DIF > i.e.
+%DIF > \[
+%DIF > \sigma(BA) = \{1\} \cup \sigma(\tilde P^HX^{-1}\tilde R (\tilde
+%DIF > P^HA^{-1}\tilde
+%DIF > R)^{-1}).
+%DIF > \]
+\DIFaddbegin 
+
+\end{enumerate}
+\DIFaddend \end{theorem}
+
+We \DIFaddbegin \DIFadd{will }\DIFaddend apply this theorem to Hermitian positive \DIFdelbegin \DIFdel{matrices and will 
+}\DIFdelend \DIFaddbegin \DIFadd{definite (HPD)  matrices to
+}\DIFaddend determine
+the
+optimal interpolation operators of \DIFdelbegin \DIFdel{AMGs }\DIFdelend \DIFaddbegin \DIFadd{AMG methods }\DIFaddend with respect to
+the
+spectral radius of the error propagation matrix.
+For \DIFdelbegin \DIFdel{Hermitian  positive definite 
+matricesjust recently }\DIFdelend \DIFaddbegin \DIFadd{HPD 
+matrices, }\DIFaddend optimal interpolation  operators with respect to the
+$A$-norm \DIFdelbegin \DIFdel{are established }\DIFdelend \DIFaddbegin \DIFadd{have been obtained recently }\DIFaddend in \cite{XuZ17, Bra18}.
+\DIFdelbegin \DIFdel{For the symmetric }\DIFdelend \DIFaddbegin \DIFadd{We will show that the optimal interpolation operators with respect to the
+spectral
+radius
+for
+the
+symmetric/symmetrized
+}\DIFaddend multigrid
+method
+(\DIFaddbegin \DIFadd{with
+}\DIFaddend pre-
+and
+post-smoothing) \DIFaddbegin \DIFadd{and
+}\DIFaddend the
+optimal
+interpolation \DIFdelbegin \DIFdel{operators }\DIFdelend \DIFaddbegin \DIFadd{operator with respect to the $A$-norm }\DIFaddend are the same. But for
+\DIFaddbegin \DIFadd{multigrid
+with
+only
+a
+}\DIFaddend post-smoothing \DIFdelbegin \DIFdel{only multigrid
+the optimal interpolations and
+}\DIFdelend \DIFaddbegin \DIFadd{step
+the optimal interpolation operators with respect to the spectral radius and
+$A$-norm
+(and
+}\DIFaddend hence
+the
+optimal
+algebraic
+multigrid
+methods\DIFaddbegin \DIFadd{)
+}\DIFaddend are  different. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD <  %%%
+\DIFdelend Using Theorem \ref{theo:mg:eig} we can also show that the 
+\DIFdelbegin \DIFdel{found   optimal interpolation operators }\DIFdelend \DIFaddbegin \DIFadd{interpolation operators with respect to the spectral radius }\DIFaddend are also optimal 
+with
+respect to the condition number of the multigrid preconditioned system. 
+
+\section{Optimal interpolation  for Hermitian positive definite matrices}
+
+\DIFdelbegin \DIFdel{Here   we  consider Hermitian  positive definite matrices matrices }\DIFdelend \DIFaddbegin \DIFadd{In this section  we  consider a HPD matrix }\DIFaddend $A$. \DIFdelbegin \DIFdel{The matrix }\DIFdelend \DIFaddbegin \DIFadd{Recall that he norm induced by
+}\DIFaddend $A$ \DIFdelbegin \DIFdel{then induces the so-called }\DIFdelend \DIFaddbegin \DIFadd{(or }\DIFaddend $A$\DIFdelbegin \DIFdel{norm, }\DIFdelend \DIFaddbegin \DIFadd{-norm) is }\DIFaddend defined for $v \in \bCn$ and $S
+\in \Cnn$ by
+\[
+\| v \|_A^2 = (v,v)_A = \|A\uha v\|_2^2,
+\]
+and 
+\[
+\| S \|_A = \|A\uha S A\umha\|_2.
+\]
+
+We \DIFdelbegin \DIFdel{consider  }\DIFdelend \DIFaddbegin \DIFadd{will study }\DIFaddend the  following two-grid  methods given by the error
+propagation
+\DIFdelbegin \DIFdel{operator
+}\DIFdelend \DIFaddbegin \DIFadd{operators
+}\DIFaddend \beq \label{mge}
+E_{TG} = (I-M^{-H}A)(I -  PA_C^{-1}P^HA)
+\eeq
+ and the symmetrized version
+\beq \label{smge}
+E_{STG} = (I-M^{-H}A)(I -  PA_C^{-1}P^HA)(I-M^{-1}A).
+\eeq
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{Thus we use }\DIFdelend \DIFaddbegin \DIFadd{Thus we are using }\DIFaddend $R = P^H$. The range of $P$,
+i.e.
+$\ran
+(P)$,
+is
+called
+the
+coarse space $V_c$.
+Here   we fix  the smoother $M^{-1}$ and \DIFdelbegin \DIFdel{consider }\DIFdelend \DIFaddbegin \DIFadd{let }\DIFaddend $E_{TG}$ and $E_{STG}$ \DIFaddbegin \DIFadd{vary }\DIFaddend with
+respect  to the choice of the interpolation operator $P$. \DIFdelbegin \DIFdel{So, in this note, 
+$E_{TG}$ and $E_{STG}$ depend on $P$.
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{We }\DIFdelend \DIFaddbegin \DIFadd{In addition, we
+}\DIFaddend assume that the smoother
+$M^{-1}$
+satisfies 
+\[
+ \|(I-M^{-1}A \|_A < 1,
+\]
+which is equivalent to \DIFaddbegin \DIFadd{the condition
+}\DIFaddend \beq \label{eq:pos}
+M +  M^{H} - A  \quad \mbox{is  positive definite,} 
+\eeq
+see\DIFaddbegin \DIFadd{, }\DIFaddend e.g.\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Vas08}}\hspace{0pt}%DIFAUXCMD
+. 
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{It is proved by  Falgout and Vassilewski \mbox{%DIFAUXCMD
+\cite{FalV04} }\hspace{0pt}%DIFAUXCMD
+that
+}%DIFDELCMD < \beq %DIFDELCMD < \label{normeq}%%%
+%DIFDELCMD < %%%
+\DIFdel{\|E_{STG}\|_A = \|E_{TG}\|_A^2.
+}%DIFDELCMD < \eeq
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{, \mbox{%DIFAUXCMD
+\cite{Vas08}}\hspace{0pt}%DIFAUXCMD
+. }\DIFaddend Given a fixed  smoother $M^{-1}$ such that $\|
+I-M^{-1}A\|_A < 1$, many AMG
+methods are designed to minimizes $ \|E_{TG}\|_A$ or a related quantity. \DIFdelbegin \DIFdel{If an operator  $P$ }\DIFdelend \DIFaddbegin \DIFadd{We
+say an interpolation operator $P^\star$ is optimal
+if it }\DIFaddend minimizes  $ \|E_{TG}\|_A$\DIFdelbegin \DIFdel{directly,
+$P$ is called optimal . 
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{. In
+view of the equality
+}\beq \label{normeq}
+\DIFadd{\|E_{STG}\|_A = \|E_{TG}\|_A^2,
+}\eeq
+\DIFadd{proved by 
+Falgout
+and Vassilevski in
+\mbox{%DIFAUXCMD
+\cite{FalV04}}\hspace{0pt}%DIFAUXCMD
+, we can conclude that an optimal interpolation operator
+$P^\star$  
+also minimizes$ \|E_{STG}\|_A$. }\DIFaddend Zikatanov
+proved in \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Zik08} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite[Lemma 2.3]{Zik08} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend that
+\[
+ \|E_{TG}\|_A^2 = 1 - \frac{1}{K(V_c)},
+\]
+where  $ K(V_c)$ is  a  \DIFdelbegin \DIFdel{value  }\DIFdelend \DIFaddbegin \DIFadd{quantity  }\DIFaddend depending  on the  coarse space\DIFdelbegin \DIFdel{.
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{, defined by
+(check this)
+}\[ \DIFadd{K(V_c) = \sup_{v \in \Cn} \frac{\|(I-Q)v\|_{M^{-1}}^2}{\|v\|_A} }\]
+\DIFaddend % The so called XZ-identity is used to get this   result \cite{XuZ02}
+Although  this 
+equality \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{has been }\DIFaddend known for a long time, \DIFdelbegin \DIFdel{just  recently it is }\DIFdelend \DIFaddbegin \DIFadd{only  recently it was }\DIFaddend used to
+determine
+optimal prolongation operators $P$  which lead   to a minimal  value of
+$\|E_{TG}\|_A$ for a given smoother (see \cite{XuZ17, Bra18}). \DIFdelbegin \DIFdel{Here  we }\DIFdelend \DIFaddbegin \DIFadd{We now recall
+this result.
+}
+
+\DIFadd{We will }\DIFaddend give an  alternative proof of this result using the
+characterization
+of
+the
+eigenvalues of the multigrid iteration operator  given in Theorem
+\ref{theo:mg:eig}.  
+
+\DIFdelbegin \DIFdel{But before  we consider }\DIFdelend \DIFaddbegin \DIFadd{We  consider first  }\DIFaddend the  more general error propagation matrix $E_M$ in
+\eqref{mgiteration} with $R= P^H$  and  $E_{M} = I - BA$. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < The error propagation matrix  $E_{M}$ can  be written  as 
+%DIF < \[
+%DIF < E_{M} = I - B_{M}A.
+%DIF < \]
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{Let $\U $ be the
+subspace spanned  by the
+columns }\DIFdelend \DIFaddbegin \DIFadd{We let $\U=
+\mathcal{R}(P) $ be the
+the
+range }\DIFaddend of the interpolation operator
+\DIFdelbegin \DIFdel{$P$ and let $\tilde U$ be a matrix whose  columns
+}\DIFdelend \DIFaddbegin \DIFadd{$P \in \Cnr$, and $\tilde U \in \Cnmr $ be an matrix with orthonormal columns
+that }\DIFaddend span
+$\U
+^\perp$ \DIFaddbegin \DIFadd{(the
+orthogonal complement  of $\U$ with respect to the Euclidean inner product)}\DIFaddend .
+Then
+Theorem \ref{theo:mg:eig}  leads to
+\[
+\sigma (BA) = \{1\} \cup \sigma(\tilde U^HX^{-1}\tilde U (\tilde
+U^HA^{-1}\tilde U)^{-1}).
+\]
+\DIFdelbegin \DIFdel{Next assume }\DIFdelend \DIFaddbegin 
+
+\DIFadd{In what follows, given a matrix $C \inCnn$ with real eigenvalues we will denote
+by
+$\lambda_{\max}(C)$ and
+$\lambda_{\min}(C)$
+the maximum and minimum eigenvalues of $C$ respectively. Assuming }\DIFaddend that $X$ is
+Hermitian positive definite and that
+\DIFdelbegin \DIFdel{the largest eigenvalue of $BA$, i.e. $\lambda_{max}(BA)$,  }\DIFdelend \DIFaddbegin \DIFadd{$\lambda_{\max}(BA)$ }\DIFaddend is at most one\DIFdelbegin \DIFdel{. Then we have
+$\rho(E_M) = 1 - \lambda_{min}(BA)$}\DIFdelend \DIFaddbegin \DIFadd{, we have
+$\rho(E_M) = 1 - \lambda_{\min}(BA)$}\DIFaddend . In order to find an optimal interpolation
+operator for the error propagation matrix\DIFaddbegin \DIFadd{,  }\DIFaddend we need  to first find
+\[  \DIFdelbegin \DIFdel{arg \max_{\tilde U \innbCnnmr} \min \sigma}\DIFdelend \DIFaddbegin \tilde{U}\DIFadd{^\star \in \argmax_{\tilde U \innbCnnmr,\, \tilde
+U^H\tilde U = I}
+\lambda_{\min}}\DIFaddend (\tilde
+U^HX^{-1}\tilde
+U
+(\tilde
+U^HA^{-1}\tilde U)^{-1}),
+\]
+and then find \DIFdelbegin \DIFdel{vectors which are orthogonal to the found optimal subspace $\mathcal{\tilde U}$}\DIFdelend \DIFaddbegin \DIFadd{an interpolation operator $P^\star \in \Cnr$ such that
+$\im(P^\star) =\im(\tilde U^\star)^{\perp}$}\DIFaddend . The following \DIFdelbegin \DIFdel{Theorem  }\DIFdelend \DIFaddbegin \DIFadd{lemma  }\DIFaddend solves the 
+first problem.
+
+\DIFdelbegin %DIFDELCMD < \begin{theorem} %%%
+\DIFdelend \DIFaddbegin \begin{lemma} \DIFaddend \label{theo:main}
+Let $A, X \innCnn$ be Hermitian positive definite \DIFdelbegin \DIFdel{. Let 
+}\DIFdelend \DIFaddbegin \DIFadd{and let
+$\{(\mu_i,w_i)\}_{i=1}^n$ be the eigenpairs of the generalized eigenvalue
+problem
+ }\[\DIFadd{X^{-1}w = \mu
+A^{-1}w,}\]
+\DIFadd{where
+}\DIFaddend \beq
+\DIFaddbegin \DIFadd{0 < }\DIFaddend \mu_1 \leq \mu_2 \leq \ldots \leq  \mu_n\DIFdelbegin %DIFDELCMD < \eeq
+%DIFDELCMD < %%%
+\DIFdel{be the  eigenvalues of the generalized eigenvalue problem $X^{-1}w = \mu A^{-1}w$ and let $w_i$, $i = 1, \ldots, n$, be the eigenvectors corresponding to $\mu_i$.
+Then 
+}\DIFdelend \DIFaddbegin \DIFadd{.
+}\eeq
+\DIFadd{Then
+}\DIFaddend \[\max\DIFdelbegin \DIFdel{_{\tilde U \innbCnnmr} \min \sigma}\DIFdelend \DIFaddbegin \DIFadd{_{\tilde U \innbCnnmr, \, \tilde U^H \tilde U=I} \lambda_{\min} }\DIFaddend (\tilde
+U^HX^{-1}\tilde U
+(\tilde
+U^HA^{-1}\tilde U)^{-1}) = \mu_{r+1}
+\]
+which is achieved by 
+\[
+\tilde \DIFdelbegin \DIFdel{U }\DIFdelend \DIFaddbegin \DIFadd{W }\DIFaddend = [\DIFdelbegin \DIFdel{w}\DIFdelend \DIFaddbegin \tilde{w}\DIFaddend _{r+1}, \ldots, \DIFdelbegin \DIFdel{w}\DIFdelend \DIFaddbegin \tilde{w}\DIFaddend _n]\DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{,
+\in \C^{n-r}}\DIFaddend \] 
+\DIFdelbegin %DIFDELCMD < \end{theorem}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{where the columns of $\tilde W$ are orthogonal in the Euclidean inner 
+product and satisfy
+$\spann\{\tilde{w}_i\}_{i=1}^n = \spann\{w_i\}_{i=1}^n$.
+}\end{lemma}
+
+\DIFaddend \begin{proof}
+Let \DIFdelbegin \DIFdel{${\bf V}$ be the
+}\DIFdelend \DIFaddbegin \DIFadd{$\tilde{U} \in \C^{n \times (n-r)}$ with $\tilde{U}^H\tilde{U} = I$. By the
+Courant-Fischer theorem we obtain 
+}\begin{align*}
+\DIFadd{\lambda_{\min} (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}) }& \DIFadd{=
+\min_{z \in \Cnnr} \frac{z^H \tilde U X^{-1} \tilde U z }{ z^H
+(\tilde U^H A^{-1} \tilde U)^{-1}}}\\
+& \DIFadd{= \min_{ z \in \im(\tilde U)}\frac{z^{H} X^{-1}z}{z^HA^{-1}z}, 
+}\end{align*}
+\DIFadd{Thus, if $\mathbf{V}$ is the }\DIFaddend set of subspaces of $\Cnn$ of dimension \DIFdelbegin \DIFdel{$n-r$. Using the Courant-Fischer theorem we obtain for $\tilde U \innbCnnmr$
+}%DIFDELCMD < \beqo
+%DIFDELCMD < & &  %%%
+\DIFdel{\min \sigma(}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{U (}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{U)^{-1})}%DIFDELCMD < \\
+%DIFDELCMD < & %%%
+\DIFdel{= }%DIFDELCMD < &  %%%
+\DIFdel{\min_{z \innCnmr} (z^H}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{Uz (z^H}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{Uz)^{-1})}%DIFDELCMD < \\
+%DIFDELCMD <  & %%%
+\DIFdel{= }%DIFDELCMD < &  %%%
+\DIFdel{\min_{\tilde z \in {\ran (\tilde U)} } (}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z (}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z)^{-1}).
+}%DIFDELCMD < \eeqo
+%DIFDELCMD < %%%
+\DIFdel{Thus
+}%DIFDELCMD < \beqo
+%DIFDELCMD < & &  %%%
+\DIFdel{\max_{\tilde U \innbCnnmr} \min \sigma(}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{U (}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{U)^{-1})}%DIFDELCMD < \\
+%DIFDELCMD < & %%%
+\DIFdel{= }%DIFDELCMD < & %%%
+\DIFdel{\max_{V  \in {\bf V}} \min_{\tilde z \in V} (}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z (}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z)^{-1})}%DIFDELCMD < \\
+%DIFDELCMD < &  %%%
+\DIFdel{= }%DIFDELCMD < & %%%
+\DIFdel{\mu_{r+1}}\DIFdelend \DIFaddbegin \DIFadd{$n \times
+(n-r)$, we have
+}\[\DIFadd{\max_{\tilde{U} \in \Cnnr, \, \tilde{U}^H\tilde U = I }
+\lambda_{\min} (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}) =
+\max_{\tilde{\mathcal{U}} \in \mathbf V } \min_{z \in \tilde{\mathcal{U}}}
+\frac{z^H X^{-1} z}{(z^HA^{-1}z)^{-1}}  = \mu_{r+1},
+}\]
+\DIFadd{and the maximum is attained by choosing a matrix $\tilde W =
+[\tilde w_{r+1}, \ldots, \tilde w _{n}]$ such that 
+the columns of $\tilde W$ are orthogonal in the Euclidean inner 
+product and satisfy
+$\spann\{\tilde{w}_i\}_{i=1}^n = \spann\{w_i\}_{i=1}^n$}\DIFaddend . 
+\DIFdelbegin %DIFDELCMD < \eeqo
+%DIFDELCMD < %%%
+\DIFdel{Moreover, the matrix $\tilde U = [w_{r+1}, \ldots, w_n]$ leads  to $\mu_{r+1}$.
+}\DIFdelend \end{proof}
+
+\DIFdelbegin \DIFdel{We then have 
+}\DIFdelend \DIFaddbegin \DIFadd{The previous lemma is the main tool to obtain the optimal interpolation
+operators.
+}\DIFaddend 
+
+\begin{theorem}\label{theo:main}
+Let $A \innCnn$ and $ X \innCnn$ as in \eqref{mgx} be Hermitian positive
+definite. Let $
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $
+be the  eigenvalues of $X^{-1}A$  and let $u_i$, $i = 1, \ldots, n$, be the
+corresponding eigenvectors. Let \DIFdelbegin \DIFdel{$\lambda_{max}(BA) \leq 1$}\DIFdelend \DIFaddbegin \DIFadd{$\{(\lambda_i, u_i)\}_{i=1}^n$ be the
+eigenpairs
+of $X^{-1}A$, where $
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $,  and suppose that
+$\lambda_{\max}(BA) \leq 1$}\DIFaddend . Then
+\beq
+\min_{\DIFdelbegin \DIFdel{P}\DIFdelend \DIFaddbegin \substack{P \in \Cnr \\ \rank(P)=r}\DIFaddend } \rho(E_{M}) =  1 - \min_{\DIFdelbegin \DIFdel{P}%DIFDELCMD < }%%%
+\DIFdel{\lambda}\DIFdelend \DIFaddbegin \substack{P
+\in \Cnr \\ \rank(P)=r}} \DIFadd{\lambda}\DIFaddend _{\DIFdelbegin \DIFdel{min}\DIFdelend \DIFaddbegin \DIFadd{\min}\DIFaddend }(BA) = 1 -
+\lambda_{r+1}.
+\eeq
+An optimal interpolation operator is given by 
+\DIFdelbegin \[
+\DIFdel{P_{opt} = }[\DIFdel{u_{1}, \ldots , u_r}]\DIFdel{.
+}\]
+%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation} \DIFadd{\label{eq:popt}
+P_{\mathrm{opt}} = }[\DIFadd{u_{1}, \ldots , u_r}]\DIFadd{.
+}\end{equation}
+\DIFaddend \end{theorem}
+\begin{proof}
+Since \DIFdelbegin \DIFdel{$\lambda_{max}(BA) \leq 1$}\DIFdelend \DIFaddbegin \DIFadd{$\lambda_{\max}(BA) \leq 1$}\DIFaddend ,  we have that 
+\beqo
+\rho(E_{M}) =  1 - \lambda_{\DIFdelbegin \DIFdel{min}\DIFdelend \DIFaddbegin \DIFadd{\min}\DIFaddend }(BA).
+\eeqo
+Note that the eigenvalues $\lambda_i $ are  the same as the $\mu_i$ in Theorem
+\ref{theo:main}.
+\DIFdelbegin \DIFdel{With  Theorem  \ref{theo:main}}\DIFdelend \DIFaddbegin \DIFadd{According to theorem  \ref{theo:main}, }\DIFaddend we need  to find vectors which are
+orthogonal
+to
+the eigenvectors  $w_{r+1}, \ldots , w_n$ of the generalized eigenvalue problem
+$X^{-1}w = \mu A^{-1}w$. Now, consider the vectors $u_i$, $i = 1, \ldots, r$.
+The vectors are also eigenvectors of the generalized eigenvalue problem  $Au =
+\lambda Xu$. All  $Xu_i = w_i$  are  eigenvectors  of the generalized
+eigenvalue problem $X^{-1}w = \mu A^{-1}w$. But the $w_i$ are
+$X^{-1}$-orthogonal (the $X\umha w_i$ are eigenvectors of the Hermitian matrix
+$X\uha A^{-1} X\uha$). Thus, the $u_i$, $i = 1, \ldots, r$ are  orthogonal to
+the  $w_{r+1}, \ldots , w_n$ \DIFdelbegin \DIFdel{and $P_{opt}$   leads   to the
+minimal value}\DIFdelend \DIFaddbegin \DIFadd{in the Euclidean inner product and the
+interpolation operator
+$P_{\mathrm{opt}}$ given by }\eqref{eq:popt} \DIFadd{is the corresponding
+minimizer}\DIFaddend . \end{proof}
+
+
+
+Now, we consider $E_{TG}$ and $E_{STG}$  defined in \eqref{mge}  and
+\eqref{smge}. Again   $E_{STG}$ and $E_{TG}$    can be written   as
+\beqo
+E_{STG} & = & I - B_{STG}A, \\
+E_{TG} & = & I - B_{TG}A,
+\eeqo
+for some  matrices $B_{STG}$ and $B_{TG}$ in $\Cnn$. A straightforward
+computation shows  that  $B_{STG}$  is Hermitian\DIFdelbegin \DIFdel{. Lemma 2.11 of \mbox{%DIFAUXCMD
+\cite{Ben01} }\hspace{0pt}%DIFAUXCMD
+gives 
+}\DIFdelend \DIFaddbegin \DIFadd{, and by 
+\mbox{%DIFAUXCMD
+\cite[Lemma 2.11]{Ben01} }\hspace{0pt}%DIFAUXCMD
+we have
+}\DIFaddend \beq \label{ben}
+\|E_{STG}\|_A = \|I - B_{STG}A\|_A = \rho(I - B_{STG}A).
+\eeq
+Moreover, the maximal eigenvalue of $B_{STG}A$ satisfies
+\DIFdelbegin \DIFdel{$\lambda_{max}(B_{STG}A) \leq 1$}\DIFdelend \DIFaddbegin \DIFadd{$\lambda_{\max}(B_{STG}A) \leq 1$}\DIFaddend , see e.g. \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Vas08}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite[Theorem 3.16]{Vas08}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
+We
+then
+obtain
+\[
+\|E_{TG}\|_A^2 = \|E_{STG}\|_A = \rho(I - B_{STG}A) = 1 -
+\lambda_{min}(B_{STG}A).
+\]
+
+
+The matrix $X$ in \eqref{mgx} is given by 
+\beq \label{defX}
+X^{-1}_{STG} = M^{-H} +  M^{-1} - M^{-H} AM^{-1} = M^{-H}( M +  M^{H} -
+A)M^{-1}.
+\eeq
+With \eqref{eq:pos} we have  that $X_{STG}$ is Hermitian positive definite.
+\DIFdelbegin \DIFdel{Thus  we get
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{We have thus the following corollary.
+}\DIFaddend \begin{corollary} \label{coro:one}
+Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ such $M + M^H -
+A$ is Hermitian positive definite\DIFdelbegin \DIFdel{. 
+Let }\DIFdelend \DIFaddbegin \DIFadd{, and
+let }\DIFaddend $X_{STG}^{-1}$  be as in \eqref{defX}\DIFdelbegin \DIFdel{.  
+ Let $
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $
+be
+the eigenvalues }\DIFdelend \DIFaddbegin \DIFadd{,  and let $\{(\lambda_i,
+u_i)\}_{i=1}^n$
+be
+the eigenpairs
+}\DIFaddend of $X_{STG}^{-1}A$\DIFdelbegin \DIFdel{and let $v_i$, $i = 1, \ldots, n$, 
+ be the corresponding eigenvectors. }\DIFdelend \DIFaddbegin \DIFadd{, where $
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $, 
+ }\DIFaddend Then
+\beq
+\min_{\DIFdelbegin \DIFdel{P}\DIFdelend \DIFaddbegin \substack{P \in \Cnr \\ \rank(P)=r}\DIFaddend } \|E_{STG}\|_A =
+\min_{\DIFdelbegin \DIFdel{P}\DIFdelend \DIFaddbegin \substack{P \in \Cnr \\ \rank(P)=r}\DIFaddend }\rho(E_{STG}) = 
+\min_{\DIFdelbegin \DIFdel{P}\DIFdelend \DIFaddbegin \substack{P \in \Cnr \\ \rank(P)=r}\DIFaddend }\|E_{TG}\|_A^2 = 1 -
+\lambda_{r+1}.
+\eeq
+An optimal interpolation operator is given by 
+\[
+P\DIFdelbegin \DIFdel{_{opt} }\DIFdelend \DIFaddbegin \DIFadd{_{\mathrm{opt}} }\DIFaddend = [v_{1}, \ldots , v_r].
+\]
+\end{corollary}
+\begin{proof}
+We have  that $X_{STG}$ is positive definite and \DIFdelbegin \DIFdel{$\lambda_{max}(B_{STG}A) \leq 1$. So Theorem \ref{theo:main} gives }\DIFdelend \DIFaddbegin \DIFadd{$\lambda_{\max}(B_{STG}A) \leq
+1$. By Theorem \ref{theo:main} we obtain }\DIFaddend the desired result.
+\end{proof}
+
+Next\DIFaddbegin \DIFadd{, }\DIFaddend let us consider  the \DIFdelbegin \DIFdel{non symmetric  multigrid . 
+%DIF <  For the symmetric multigird  we have that the above $P_{opt}$ minimizes both the $A$-norm and the spectral radius. Since $\sigma(B_{STG}A) \subset (0,1]$  we have   $\rho(E_{STG}) = 1 - \lambda_{min}(X_{STG}^{-1}A)$. This does not hold for the non symmetric multigrid
+}\DIFdelend \DIFaddbegin \DIFadd{non-symmetric multigrid method defined implicitly
+by $E_{TG}$, in }\eqref{mge}\DIFadd{.
+%DIF >  For the symmetric multigird  we have that the above $P_{opt}$ minimizes both
+%DIF > the $A$-norm and the spectral radius. Since $\sigma(B_{STG}A) \subset (0,1]$
+%DIF > we have   $\rho(E_{STG}) = 1 - \lambda_{min}(X_{STG}^{-1}A)$. This does not
+%DIF > hold for the non symmetric multigrid
+}\DIFaddend We use a Hermitian positive  definite smoother $M^{-1}$. The matrix $X$ in
+\eqref{mgx} is given by
+\beq \label{defXtg}
+X^{-1}_{TG} = M^{-1}.
+\eeq
+
+We have
+\beqo
+\rho(E_{TG}) = 1 - \lambda_{\DIFdelbegin \DIFdel{min}\DIFdelend \DIFaddbegin \DIFadd{\min}\DIFaddend }(B_{TG}A)
+\ \  \mbox{or} \ \ 
+\rho(E_{TG}) = -(1 - \lambda_{\DIFdelbegin \DIFdel{max}\DIFdelend \DIFaddbegin \DIFadd{\max}\DIFaddend }(B_{TG}A)).
+\eeqo
+
+\DIFdelbegin \DIFdel{Thus, here }\DIFdelend \DIFaddbegin \DIFadd{Therefore, }\DIFaddend it is not clear \DIFdelbegin \DIFdel{, if $\lambda_{min}(B_{TG}A)$ or $\lambda_{max}(B_{TG}A)$  }\DIFdelend \DIFaddbegin \DIFadd{which of $\lambda_{\min}(B_{TG}A)$ 
+$\lambda_{\max}(B_{TG}A)$ }\DIFaddend leads to the spectral radius.
+One way to overcome  this problem is scaling. Note that we  have for all
+Hermitian positive defnite matrices $X$ and $A$ and for all matrices $\tilde U
+\in \Cnnr$
+
+%\beqo
+%& &  \min \sigma(\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1})\\
+%DIF < & = &  \min_{z \innCnmr} (z^H\tilde U^HX^{-1}\tilde Uz (z^H\tilde U^HA^{-1}\tilde Uz)^{-1})\\
+%DIF < & = &  \min_{\tilde z \in {\ran (\tilde U)} } (\tilde z^HX^{-1}\tilde z (\tilde z^HA^{-1}\tilde z)^{-1%})\\
+%DIF < & \geq & \min_{\tilde z \in \bCn } (\tilde z^HX^{-1}\tilde z (\tilde z^HA^{-1}\tilde z)^{-1})\\
+%DIF > & = &  \min_{z \innCnmr} (z^H\tilde U^HX^{-1}\tilde Uz (z^H\tilde
+%DIF > U^HA^{-1}\tilde Uz)^{-1})\\
+%DIF > & = &  \min_{\tilde z \in {\ran (\tilde U)} } (\tilde z^HX^{-1}\tilde z
+%DIF > (\tilde z^HA^{-1}\tilde z)^{-1%})\\
+%DIF > & \geq & \min_{\tilde z \in \bCn } (\tilde z^HX^{-1}\tilde z (\tilde
+%DIF > z^HA^{-1}\tilde z)^{-1})\\
+%& = & \lambda_{min}(X^{-1}A),
+%\eeqo
+
+%and similarly
+\beqo
+\DIFdelbegin %DIFDELCMD < & &  %%%
+\DIFdel{\max \sigma}\DIFdelend \DIFaddbegin \DIFadd{\lambda_{\max}}\DIFaddend (\tilde U^HX^{-1}\tilde U (\tilde U^HA^{-1}\tilde
+U)^{-1})
+\DIFdelbegin %DIFDELCMD < \\
+%DIFDELCMD < %%%
+\DIFdelend & = &  \max_{z \innCnmr} \DIFdelbegin \DIFdel{(z^H}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{Uz (z^H}%DIFDELCMD < \tilde %%%
+\DIFdel{U^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{Uz)^{-1})}\DIFdelend \DIFaddbegin \DIFadd{\frac{z^H\tilde U^HX^{-1}\tilde Uz}{ z^H\tilde
+U^HA^{-1}\tilde Uz}}\DIFaddend \\
+& = &  \max_{\tilde z \in {\ran (\tilde U)} } \DIFdelbegin \DIFdel{(}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z (}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z)^{-1})}\DIFdelend \DIFaddbegin \DIFadd{\frac{\tilde z^HX^{-1}\tilde z}{
+\tilde z^HA^{-1}\tilde z}}\DIFaddend \\
+& \leq &\max_{\tilde z \in \bCn  } \DIFdelbegin \DIFdel{(}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HX^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z (}%DIFDELCMD < \tilde %%%
+\DIFdel{z^HA^{-1}}%DIFDELCMD < \tilde %%%
+\DIFdel{z)^{-1})}\DIFdelend \DIFaddbegin \DIFadd{\frac{\tilde z^HX^{-1}\tilde z}{
+\tilde z^HA^{-1}\tilde z}}\DIFaddend \\
+& = & \lambda_{\DIFdelbegin \DIFdel{max}\DIFdelend \DIFaddbegin \DIFadd{\max}\DIFaddend }(X^{-1}A).
+\eeqo
+
+Hence, the  Hermitian smoother
+\beqo
+\hat M^{-1} = \DIFdelbegin \DIFdel{\frac{1}{\lambda_{max}(M^{-1}A)}}\DIFdelend \DIFaddbegin \DIFadd{\frac{1}{\lambda_{\max}(M^{-1}A)}}\DIFaddend M^{-1}
+\eeqo
+satisfies
+\beq \label{eq:spec1}
+\lambda_{\DIFdelbegin \DIFdel{max}\DIFdelend \DIFaddbegin \DIFadd{\max}\DIFaddend }(\hat M^{-1}A) = 1.
+\eeq
+With Theorem \ref{theo:mg:eig} and $X^{-1} = \hat M^{-1}$ we then have 
+
+\beqo
+\lambda_{\DIFdelbegin \DIFdel{max}\DIFdelend \DIFaddbegin \DIFadd{\max}\DIFaddend } ((B_{TG}A) = 1,
+\eeqo
+thus
+\beqo
+\rho(E_{TG}) = 1 - \lambda_{\DIFdelbegin \DIFdel{min }\DIFdelend \DIFaddbegin \DIFadd{\min }\DIFaddend } (B_{TG}A).
+\eeqo
+
+Note \DIFdelbegin \DIFdel{, }\DIFdelend that \eqref{eq:spec1} is equivalent to  $\hat M - A $ being positive
+semidefinite. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{Thus we  have 
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{This discussion leads to the following corollary.
+}\DIFaddend %The matrix  $X^{-1}$ is just the smoother $M^{-H}$.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \begin{corollary} \label{coro:two}
+Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ such $M - A$ is
+Hermitian positive definite.
+Let $X_{TG}^{-1} =  M^{-1}$.   
+ Let $
+\tilde \lambda_1 \leq \tilde \lambda_2 \leq \ldots \leq  \tilde \lambda_n $
+be the  eigenvalues of $X_{TG}^{-1}A$  and let $x_i$, $i = 1, \ldots, n$, be
+the corresponding eigenvectors. Then
+\beq \label{eq:min.case2}
+\min_{\DIFdelbegin \DIFdel{P}\DIFdelend \DIFaddbegin \substack{P \in \Cnr \\ \rank(P)=r}\DIFaddend }\rho(E_{TG}) = 1 - \tilde
+\lambda_{r+1}.
+\eeq
+An optimal interpolation operator is given by 
+\beq  \label{eq:min.case2int}
+P_{\DIFdelbegin \DIFdel{opt}\DIFdelend \DIFaddbegin \DIFadd{\mathrm{opt}}\DIFaddend } = [x_{1}, \ldots , x_r].
+\eeq
+\end{corollary}
+\begin{proof}
+The matrix $X_{TG}^{-1} = M^{-1}$ is Hermitian positive definite. Moreover,
+since $M - A$ is also Hermitian positive definite the eigenvalues of
+$X_{TG}^{-1}A$ are less then  one. Thus, with Theorem \ref{theo:mg:eig},
+\DIFdelbegin \DIFdel{$\lambda_{max}(B_{TG}A) = 1$}\DIFdelend \DIFaddbegin \DIFadd{$\lambda_{\max}(B_{TG}A) = 1$}\DIFaddend .  So, with  Theorem \ref{theo:main}  we obtain
+\eqref{eq:min.case2} and \eqref{eq:min.case2int}.
+\end{proof}
+
+\DIFdelbegin \DIFdel{Next let us }\DIFdelend \DIFaddbegin \DIFadd{Now we will }\DIFaddend compare the optimal interpolation with respect to the $A$-norm as
+given in Corollary \ref{coro:one}, with  the optimal interpolation with respect
+to the spectral radius as given in Corollary \ref{coro:two}. Using $M=M^H$ and
+$M - A$ Hermitian positive definite, the vectors used in  Corollary
+\ref{coro:one}
+are  eigenvectors of
+\beqo
+X^{-1}_{STG}A = 2M^{-1}A - M^{-1}AM^{-1}A,
+\eeqo
+while in Corollary \ref{coro:one} we use  the eigenvectors of
+\beqo
+X^{-1}_{TG}A = M^{-1}A.
+\eeqo
+But $X^{-1}_{STG}A$ is just a polynomial in $M^{-1}A$ , where   the polynomial
+is given by
+\beq \label{eq:pol}
+p(t) = 2t - t^2.
+\eeq
+Thus, the eigenvectors of both matrices are the same. Moreover, the
+eigenvalues are  related
+by   the above polynomial. Hence, the eigenvectors corresponding  to the
+smallest eigenvalues of
+$X^{-1}_{STG}A$  are the same   eigenvectors that correspond to the smallest
+eigenvalues of $X^{-1}_{TG}A$. \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend Hence, the optimal interpolation in Corollary
+\ref{coro:one}  and Corollary
+\ref{coro:two} are the same, if we assume that $M - A$ is \DIFdelbegin \DIFdel{hermitian }\DIFdelend \DIFaddbegin \DIFadd{Hermitian }\DIFaddend positive
+definite.
+
+Next, let us have  a closer look to the \DIFdelbegin \DIFdel{non symmetric multigrid }\DIFdelend \DIFaddbegin \DIFadd{non-symmetric two grid method }\DIFaddend and avoid
+scaling. We assume  that
+the smoother $M$ is \DIFdelbegin \DIFdel{Hermitain  }\DIFdelend \DIFaddbegin \DIFadd{Hermitian  }\DIFaddend and  leads to a convergent scheme, i.e.
+\beq  \label{eq:smoother:con:}
+\rho(I - M^{-1}A) < 1, 
+\eeq
+which implies $\sigma(M^{-1}A) \subset (0,2).$ Thus, for the matrix $E_{TG}$
+we have as above
+\beqo
+\rho(E_{TG}) = 1 - \lambda_{\DIFdelbegin \DIFdel{min}\DIFdelend \DIFaddbegin \DIFadd{\min}\DIFaddend }(B_{TG}^{-1}A) < 1 
+\ \ \mbox{or} \ \
+\rho(E_{TG}) = -(1 - \lambda_{\DIFdelbegin \DIFdel{max}\DIFdelend \DIFaddbegin \DIFadd{\max}\DIFaddend }(B_{TG}^{-1}A)) < 1.
+\eeqo
+
+Let 
+\beqo
+Z = \tilde U^HX_{TG}^{-1}\tilde U (\tilde U^HA^{-1}\tilde U)^{-1}).
+\eeqo
+
+Then we have $\sigma(Z) \subset (0,2)$ and with  Theorem \ref{theo:mg:eig}
+\beqo
+\sigma(E_{TG}) = \{0\} \cup \sigma(I-Z).
+\eeqo
+But $\sigma(I-Z) \subset (-1,1) $. To minimize the spectral radius of $E_{TG}$
+over all interpolation we consider the matrix $(I - Z)^2$. \DIFdelbegin \DIFdel{We  obtain
+}\DIFdelend \DIFaddbegin \DIFadd{Our next theorem
+deals with this case.
+}\DIFaddend 
+
+\begin{theorem} \label{theo:main2}
+Let  $A\inCnn$  be Hermitian positive definite\DIFdelbegin \DIFdel{. Let }\DIFdelend \DIFaddbegin \DIFadd{, and let }\DIFaddend $ M \inCnn$ be
+Hermitian
+such $\rho(I - M^{-1}A) < 1$.
+Let $X_{TG}^{-1} =  M^{-1}$\DIFdelbegin \DIFdel{.   
+ Let }\DIFdelend \DIFaddbegin \DIFadd{,
+and let $\{(\lambda_i,y_i)\}_{i=1}^n$ be the eigenpairs of $(I -
+X_{TG}^{-1}A)^2$ with }\DIFaddend $
+\hat \lambda_1 \leq \hat \lambda_2 \leq \ldots \leq  \hat \lambda_n $\DIFdelbegin \DIFdel{be the  eigenvalues of $(I - X_{TG}^{-1}A)^2$  and let $y_i$, $i = 1, \ldots, n$, be the corresponding eigenvectors}\DIFdelend . Then
+\beq \label{eq:min.case3}
+\min_{\DIFdelbegin \DIFdel{P}\DIFdelend \DIFaddbegin \substack{P \in \Cnr \\ \rank(P)=r}\DIFaddend }\rho(E_{TG}) = (\hat
+\lambda_{n-r})^{\frac{1}{2}}.
+\eeq
+An optimal interpolation operator is given by 
+\beq  \label{eq:min.case3int}
+P_{\DIFdelbegin \DIFdel{opt}\DIFdelend \DIFaddbegin \DIFadd{\mathrm{opt}}\DIFaddend } = [y_{n-r+1}, \ldots , y_n].
+\eeq
+\end{theorem}
+\begin{proof}
+Using the theorem of Courant and Fischer and Theorem \ref{theo:mg:eig} we have
+\beqo
+& & \min_{\tilde U \DIFaddbegin \DIFadd{\innbCnnmr, \, }\tilde \DIFadd{U^H }\tilde \DIFadd{U=I}\DIFaddend } \DIFdelbegin \DIFdel{\max \sigma}\DIFdelend \DIFaddbegin \DIFadd{\lambda_{\max}}\DIFaddend ((I \DIFdelbegin \DIFdel{- Z}\DIFdelend \DIFaddbegin \DIFadd{-Z}\DIFaddend )^2) \\
+& = & \min_{\tilde U \DIFaddbegin \DIFadd{\innbCnnmr, \, }\tilde \DIFadd{U^H }\tilde \DIFadd{U=I}\DIFaddend }
+\DIFdelbegin \DIFdel{\max \sigma(((}\DIFdelend \DIFaddbegin \DIFadd{\lambda_{\max}((}\DIFaddend \tilde U^HA^{-1}\tilde U -
+\tilde
+U^HX_{TG}^{-1}\tilde U) (\tilde U^HA^{-1}\tilde U)^{-1})^2)\\
+& = & \min_{\tilde U \DIFaddbegin \DIFadd{\innbCnnmr, \, }\tilde \DIFadd{U^H }\tilde \DIFadd{U=I}\DIFaddend } \max_{z \in \bC
+^{n-r}}  ((z^H(\tilde U^HA^{-1}\tilde U -
+\tilde U^HX_{TG}^{-1}\tilde U)z) (z^H\tilde U^HA^{-1}\tilde Uz)^{-1})^2)\\
+& = & \min_{\tilde U \DIFaddbegin \DIFadd{\innbCnnmr, \, }\tilde \DIFadd{U^H }\tilde \DIFadd{U=I}\DIFaddend } \max_{y \in \ran
+(\tilde U)}  ((y^H(A^{-1} -
+X_{TG}^{-1})y) (y^HA^{-1}y)^{-1})^2)\\
+& = & \hat \lambda_{n-r}.
+\eeqo
+
+The optimal interpolation is then given by \eqref{eq:min.case3int}.
+\end{proof}
+
+
+Note \DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{that }\DIFaddend the above Theorem \ref{theo:main2} and  Corollary \ref{coro:one}
+\DIFdelbegin \DIFdel{lead }\DIFdelend \DIFaddbegin \DIFadd{correspond }\DIFaddend to
+clear statements\DIFdelbegin \DIFdel{. The }\DIFdelend \DIFaddbegin \DIFadd{: the }\DIFaddend optimal interpolation operators are given
+by
+those
+eigenvectors for which the smoothing is slowest to converge.
+
+\section{The optimal interpolation with respect to the  condition number}
+
+
+
+
+
+Note  that for symmetric multigrid \DIFdelbegin \DIFdel{with  }\DIFdelend \DIFaddbegin \DIFadd{where  }\DIFaddend $M + M^H - A$ \DIFaddbegin \DIFadd{is }\DIFaddend Hermitian  positive
+definite  the largest eigenvalue of
+$B_{STG}A$ is one (see e.g. \cite{Not15}).  As seen in the proof of Corollary
+\ref{coro:two}, the same holds  for  $B_{TG}A$ when we assume  that  $M - A$ is
+Hermitian  positive definite. The later
+assumption can be obtained  by scaling, however, this scaling \DIFdelbegin \DIFdel{effectes }\DIFdelend \DIFaddbegin \DIFadd{affects }\DIFaddend the
+spectral radius of the
+error propagation matrix. But for the condition number of the multigrid
+preconditioned system, this scaling has no effect.
+
+Theorem \ref{theo:mg:eig} characterizes the  spectrum of $B_{STG}A$ and
+$B_{TG}A$. Following the arguments above, where   we found optimal
+interpolation operators, such that
+\DIFdelbegin \DIFdel{$\lambda_{min}(B_{STG}A)$ and $\lambda_{min}(B_{TG}A)$ }\DIFdelend \DIFaddbegin \DIFadd{$\lambda_{\min}(B_{STG}A)$ and $\lambda_{\min}(B_{TG}A)$ }\DIFaddend are maximal, we obtain
+that the same interpolation operators are optimal with respect to the condition
+number $\kappa$ of the preconditioned system. \DIFdelbegin \DIFdel{We then have
+}\DIFdelend \DIFaddbegin \DIFadd{This leads to the next result.
+}\DIFaddend 
+
+ \begin{theorem}
+Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ such $M + M^H -
+A$ is Hermitian positive definite.
+Let $X_{STG}^{-1}$  be as in \eqref{defX}.  
+ Let \DIFdelbegin \DIFdel{$
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $
+be the eigenvalues }\DIFdelend \DIFaddbegin \DIFadd{$\{(\lambda_i,v_i)\}_{i=1}^n$ be the eigenpairs }\DIFaddend of $X_{STG}^{-1}A$\DIFdelbegin \DIFdel{and let $v_i$, $i = 1, \ldots, n$, be the corresponding eigenvectors}\DIFdelend \DIFaddbegin \DIFadd{, where
+$
+\lambda_1 \leq \lambda_2 \leq \ldots \leq  \lambda_n $}\DIFaddend . Then
+\beq
+\min\DIFdelbegin \DIFdel{_P }\DIFdelend \DIFaddbegin \DIFadd{_{\substack{P \in \Cnr \\ \rank(P)=r}} }\DIFaddend \kappa(B_{STG}A) =
+\frac{1}{\lambda_{r+1}}.
+\eeq
+An optimal interpolation operator is given by 
+\[
+P\DIFdelbegin \DIFdel{_{opt} }\DIFdelend \DIFaddbegin \DIFadd{_{\mathrm{opt}} }\DIFaddend = [v_{1}, \ldots , v_r].
+\]
+\end{theorem}
+
+\DIFdelbegin \DIFdel{For the non symmetric multigrid we obtain
+}\DIFdelend \DIFaddbegin \DIFadd{Our final result gives the optimal interpolation operator for the non-symmetric
+two-grid
+method with respect to the condition number $\kappa$.
+}\DIFaddend 
+
+\begin{theorem}
+Let  $A\inCnn$  be Hermitian positive definite. Let $ M \inCnn$ be Hermitian
+positive definite  such that $\rho(I - M^{-1}A) < 1.$
+Let $X_{TG}^{-1} =  M^{-1}$\DIFdelbegin \DIFdel{.   
+ Let }\DIFdelend \DIFaddbegin \DIFadd{, and let $\{(\tilde, \ ambda_i, x_i)\}_{i=1}^n$ be 
+the eigenpairs of $X_{TG}^{-1}A$  where  }\DIFaddend $
+\tilde \lambda_1 \leq \tilde \lambda_2 \leq \ldots \leq  \tilde \lambda_n $\DIFdelbegin \DIFdel{be the  eigenvalues of $X_{TG}^{-1}A$  and let $x_i$, $i = 1, \ldots, n$, be 
+the corresponding eigenvectors}\DIFdelend .
+Then
+\beqo
+\min\DIFdelbegin \DIFdel{_P }\DIFdelend \DIFaddbegin \DIFadd{_{\substack{P \in \Cnr \\ \rank(P)=r}}  }\DIFaddend \kappa(B_{TG}A) = \frac{1}{\tilde
+\lambda_{r+1}}
+\eeqo
+An optimal interpolation operator is given by 
+\beqo
+P_{\DIFdelbegin \DIFdel{opt}\DIFdelend \DIFaddbegin \DIFadd{\mathrm{opt}}\DIFaddend } = [x_{1}, \ldots , x_r].
+\eeqo
+\end{theorem}
+
+Note, that  in all cases of the previous sections any other interpolation
+operator $\tilde P$  with  \DIFdelbegin \DIFdel{$\ran (\tilde P) = \ran (P_{opt})$ }\DIFdelend \DIFaddbegin \DIFadd{$\ran (\tilde P) = \ran (P_{\mathrm{opt}})$ }\DIFaddend is also
+optimal.
+
+\section{Conclusion}
+As mentioned in \cite{XuZ17}\DIFaddbegin \DIFadd{, }\DIFaddend the  $A$ in AMG methods can \DIFdelbegin \DIFdel{be seen }\DIFdelend \DIFaddbegin \DIFadd{also be understood }\DIFaddend as
+an
+$A$
+for
+Abstract 
+Multigrid Methods. Here  we contributed to the  theory of  
+abstract multigrid methods \DIFdelbegin \DIFdel{. Based on a  }\DIFdelend \DIFaddbegin \DIFadd{by presenting alternate derivations of previously
+known results. Building on a  result from \mbox{%DIFAUXCMD
+\cite{GarKN18} }\hspace{0pt}%DIFAUXCMD
+which gives a
+}\DIFaddend characterization of the spectrum of the
+error propagation operator and the preconditioned system of two-grid methods\DIFaddbegin \DIFadd{,
+}\DIFaddend we derived optimal interpolation operators with respect  to the $A$-norm and
+the spectral radius of the  error propagation operator matrix in a
+short way. For the symmetric \DIFdelbegin \DIFdel{multigrid }\DIFdelend \DIFaddbegin \DIFadd{two-grid }\DIFaddend method (pre- and  post-smoothing) the
+optimal interpolation operators are  the same. But for \DIFdelbegin \DIFdel{post-smoothing only multigrid }\DIFdelend \DIFaddbegin \DIFadd{a two-grid
+method with only post-smoothing
+}\DIFaddend the optimal interpolations and hence the optimal algebraic multigrid
+methods are different. We also showed that these interpolation operators
+are optimal  with respect to the condition number of the preconditioned system.
+
+\bibliographystyle{siamplain}
+%\bibliographystyle{siam}
+\bibliography{GarKN2.bib}
+
+
+
+\end{document}
